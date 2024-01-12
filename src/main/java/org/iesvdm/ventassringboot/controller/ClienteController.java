@@ -15,7 +15,7 @@ public class ClienteController {
     @Autowired
     private ClienteService clienteService;
 
-    @GetMapping("/clientes")
+    @GetMapping({"/clientes", "/clients"})
     public String listar(Model model) {
 
         List<Cliente> clienteList = clienteService.listAll();
