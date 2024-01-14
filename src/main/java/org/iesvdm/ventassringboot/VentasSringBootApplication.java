@@ -10,4 +10,5 @@ public class VentasSringBootApplication {
         SpringApplication.run(VentasSringBootApplication.class, args);
     }
 
+
 }

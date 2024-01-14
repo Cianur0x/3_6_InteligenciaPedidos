@@ -1,7 +1,6 @@
 package org.iesvdm.ventassringboot.dao;
 
 import org.iesvdm.ventassringboot.domain.Cliente;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -11,8 +10,11 @@ import java.util.Optional;
 @Repository
 public class ClienteDAOImpl implements ClienteDAO {
 
-    @Autowired
-    private JdbcTemplate jdbcTemplate;
+    private final JdbcTemplate jdbcTemplate;
+
+    public ClienteDAOImpl(JdbcTemplate jdbcTemplate) {
+        this.jdbcTemplate = jdbcTemplate;
+    }
 
     @Override
     public void create(Cliente cliente) {

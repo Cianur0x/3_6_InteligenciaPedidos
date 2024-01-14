@@ -1,7 +1,7 @@
 <!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
-<html xmlns:th="http://www.thymeleaf.org" lang="">
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
 <head>
-    <title>Title</title>
+    <title>Clientes</title>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -15,79 +15,89 @@
           crossorigin="anonymous">
 </head>
 <body>
-<div class=" d-flex justify-content-center">
-    <table class="table table-striped w-75">
-        <thead>
-        <tr>
-            <th scope="col">ID</th>
-            <th scope="col">Nombre</th>
-            <th scope="col">Apellido1</th>
-            <th scope="col">Apellido2</th>
-            <th scope="col">Cuidad</th>
-            <th scope="col">Categoría</th>
-            <th></th>
-            <th></th>
-            <th></th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="cliente : ${listaClientes}">
-            <th scope="row" th:text="${cliente.id}">Título</th>
-            <td th:text="${cliente.nombre}">Título</td>
-            <td th:text="${cliente.apellido1}">Autor</td>
-            <td th:text="${cliente.apellido2}">Título</td>
-            <td th:text="${cliente.ciudad}">Autor</td>
-            <td th:text="${cliente.categoria}">Autor</td>
 
-            <td>
-                <form method="get">
-                    <input type="hidden" name="id"/>
-                    <button type="submit" class="btn btn-secondary"><i class="fas fa-pen"></i>&ensp;Editar</button>
-                </form>
-            </td>
-            <td>
-                <form method="post">
-                    <input type="hidden" name="id"/>
-                    <button type="submit" class="btn btn-info"><i class="fas fa-info"></i>&ensp;Ver Detalle</button>
-                </form>
-            </td>
-            <td>
-                <form th:method="post" >
-                    <button type="button" class="btn btn-danger" data-toggle="modal"
-                            th:data-target="'#modal' + ${cliente.id}"><i class="fas fa-trash"></i>&ensp;Borrar
-                    </button>
-                    <!-- Modal -->
-                    <div class="modal fade" th:id="'modal' + ${cliente.id}" tabindex="-1" role="dialog"
-                         aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                        <div class="modal-dialog modal-dialog-centered" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLongTitle">¿Está seguro de que quiere
-                                        borrar este cliente?</h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
+<div class="d-flex justify-content-center">
+    <div class="w-75">
+        <div class="row d-flex justify-content-center align-items-center">
+            <h1 class="text-center">Clientes</h1>
+            <form th:action="@{/clientes/crear}" class="p-3">
+                <input type="hidden" name="id"/>
+                <button type="submit" class="btn btn-primary"><i class="fas fa-plus-square"></i> &ensp;Crear</button>
+            </form>
+        </div>
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Nombre</th>
+                <th scope="col">Apellido1</th>
+                <th scope="col">Apellido2</th>
+                <th scope="col">Cuidad</th>
+                <th scope="col">Categoría</th>
+                <th></th>
+                <th></th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="cliente : ${listaClientes}">
+                <th scope="row" th:text="${cliente.id}">Título</th>
+                <td th:text="${cliente.nombre}">Título</td>
+                <td th:text="${cliente.apellido1}">Autor</td>
+                <td th:text="${cliente.apellido2}">Título</td>
+                <td th:text="${cliente.ciudad}">Autor</td>
+                <td th:text="${cliente.categoria}">Autor</td>
 
-                                <div class="modal-body" th:text="'Cliente con ID: '+ ${cliente.id}">
+                <td>
+                    <form method="get" th:action="@{/clientes/editar/__${cliente.id}__}">
+                        <input type="hidden" name="id"/>
+                        <button type="submit" class="btn btn-secondary"><i class="fas fa-pen"></i>&ensp;Editar</button>
+                    </form>
+                </td>
+                <td>
+                    <form method="get" th:action="@{/clientes/__${cliente.id}__}">
+                        <input type="hidden" name="id"/>
+                        <button type="submit" class="btn btn-info"><i class="fas fa-info"></i>&ensp;Ver Detalles
+                        </button>
+                    </form>
+                </td>
+                <td>
+                    <form th:method="post" th:action="@{/clientes/borrar/__${cliente.id}__}">
+                        <button type="button" class="btn btn-danger" data-toggle="modal"
+                                th:data-target="'#modal' + ${cliente.id}"><i class="fas fa-trash"></i>&ensp;Borrar
+                        </button>
+                        <!-- Modal -->
+                        <div class="modal fade" th:id="'modal' + ${cliente.id}" tabindex="-1" role="dialog"
+                             aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLongTitle">¿Está seguro de que quiere
+                                            borrar este cliente?</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
 
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">
-                                        No, cancelar.
-                                    </button>
-                                    <button type="submit" class="btn btn-primary">Sí, continuar.</button>
+                                    <div class="modal-body" th:text="'Cliente con ID: '+ ${cliente.id}">
+
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                                            No, cancelar.
+                                        </button>
+                                        <button type="submit" class="btn btn-primary">Sí, continuar.</button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </form>
-            </td>
-        </tr>
-        </tbody>
-    </table>
+                    </form>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
 </div>
-
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"

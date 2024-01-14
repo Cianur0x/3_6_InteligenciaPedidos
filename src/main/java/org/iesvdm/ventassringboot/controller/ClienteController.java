@@ -2,7 +2,6 @@ package org.iesvdm.ventassringboot.controller;
 
 import org.iesvdm.ventassringboot.domain.Cliente;
 import org.iesvdm.ventassringboot.service.ClienteService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -12,8 +11,17 @@ import java.util.List;
 
 @Controller
 public class ClienteController {
-    @Autowired
-    private ClienteService clienteService;
+    // Field injection is not recommended cuando usamos el @Autowired
+    private final ClienteService clienteService;
+
+    public ClienteController(ClienteService clienteService) {
+        this.clienteService = clienteService;
+    }
+
+    @GetMapping(value = "/")
+    public String index() {
+        return "index";
+    }
 
     @GetMapping({"/clientes", "/clients"})
     public String listar(Model model) {
