@@ -11,4 +11,8 @@ public class Comercial {
     private String apellido1;
     private String apellido2;
     private Double comision;
+
+    public Comercial() {
+
+    }
 }
