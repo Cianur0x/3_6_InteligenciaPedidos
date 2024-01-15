@@ -5,15 +5,13 @@ import org.iesvdm.ventassringboot.domain.Comercial;
 import org.iesvdm.ventassringboot.service.ComercialService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.view.RedirectView;
 
 import java.util.List;
 
 @Controller
+// @RequestMapping("/comerciales")
 public class ComercialController {
     // Field injection is not recommended cuando usamos el @Autowired
     private final ComercialService comercialService;

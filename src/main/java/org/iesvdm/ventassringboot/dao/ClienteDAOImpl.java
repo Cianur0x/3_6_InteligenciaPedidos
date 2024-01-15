@@ -2,15 +2,24 @@ package org.iesvdm.ventassringboot.dao;
 
 import org.iesvdm.ventassringboot.domain.Cliente;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
+import org.springframework.jdbc.core.namedparam.SqlParameterSource;
+import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
+import java.sql.PreparedStatement;
+import java.sql.Statement;
 import java.util.List;
 import java.util.Optional;
 
 @Repository
 public class ClienteDAOImpl implements ClienteDAO {
 
+
     private final JdbcTemplate jdbcTemplate;
+
 
     public ClienteDAOImpl(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
@@ -57,4 +66,67 @@ public class ClienteDAOImpl implements ClienteDAO {
 
         if (rows == 0) System.out.println("Update de cliente con 0 registros actualizados.");
     }
+
+
+    public void create_SIN_RECARGA_DE_ID(Cliente cliente) {
+
+
+        jdbcTemplate.update("""
+                        INSERT INTO cliente
+                        (nombre, apellido1, apellido2, ciudad, categoría)
+                        VALUE
+                        (?, ?, ?, ?, ?)
+                        """
+                , cliente.getNombre()
+                , cliente.getApellido1()
+                , cliente.getApellido2()
+                , cliente.getCiudad()
+                , cliente.getCategoria());
+
+
+        //NO SE ACTUALIZA EL ID AUTO_INCREMENT DE MYSQL EN EL BEAN DE CLIENTE
+    }
+
+    public void create_CON_RECARGA_DE_ID_POR_PS(Cliente cliente) {
+
+        KeyHolder keyHolder = new GeneratedKeyHolder();
+
+        jdbcTemplate.update(connection -> {
+            PreparedStatement ps = connection
+                    .prepareStatement("""
+                            INSERT INTO cliente
+                            (nombre, apellido1, apellido2, ciudad, categoría)
+                            VALUE
+                            (?, ?, ?, ?, ?)
+                            """, Statement.RETURN_GENERATED_KEYS);
+            int idx = 1;
+            ps.setString(idx++, cliente.getNombre());
+            ps.setString(idx++, cliente.getApellido1());
+            ps.setString(idx++, cliente.getApellido2());
+            ps.setString(idx++, cliente.getCiudad());
+            ps.setInt(idx++, Integer.parseInt(cliente.getCategoria()));
+            return ps;
+        }, keyHolder);
+        //SE ACTUALIZA EL ID AUTO_INCREMENT DE MYSQL EN EL BEAN DE CLIENTE MEDIANTE EL KEYHOLDER
+        cliente.setId(keyHolder.getKey().intValue());
+    }
+
+    public void create_CON_RECARGA_DE_ID_POR_SIMPLEJDBCINSERT(Cliente cliente) {
+
+        SimpleJdbcInsert simpleJdbcInsert = new SimpleJdbcInsert(jdbcTemplate);
+        simpleJdbcInsert
+                .withTableName("cliente")
+                .usingGeneratedKeyColumns("id");
+        SqlParameterSource params = new MapSqlParameterSource()
+                .addValue("nombre", cliente.getNombre())
+                .addValue("apellido1", cliente.getApellido1())
+                .addValue("apellido2", cliente.getApellido2())
+                .addValue("ciudad", cliente.getCiudad())
+                .addValue("categoría", cliente.getCategoria());
+        Number number = simpleJdbcInsert.executeAndReturnKey(params);
+
+        cliente.setId(number.intValue());
+    }
+
+
 }

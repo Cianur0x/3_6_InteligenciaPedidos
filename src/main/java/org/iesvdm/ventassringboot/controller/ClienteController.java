@@ -10,17 +10,13 @@ import org.springframework.web.servlet.view.RedirectView;
 import java.util.List;
 
 @Controller
+// @RequestMapping("/clientes")
 public class ClienteController {
     // Field injection is not recommended cuando usamos el @Autowired
     private final ClienteService clienteService;
 
     public ClienteController(ClienteService clienteService) {
         this.clienteService = clienteService;
-    }
-
-    @GetMapping(value = "/")
-    public String index() {
-        return "index";
     }
 
     @GetMapping({"/clientes", "/clients"})
