@@ -25,11 +25,21 @@ public class ClienteDAOImpl implements ClienteDAO {
         this.jdbcTemplate = jdbcTemplate;
     }
 
+    /**
+     * Se inserta un nuevo cliente en la base de datos
+     * @param cliente, objeto que se recoge en un formulario
+     */
     @Override
     public void create(Cliente cliente) {
         jdbcTemplate.update("INSERT INTO cliente (nombre , apellido1 , apellido2, ciudad, categoría) VALUES (?, ?, ?, ?, ?)", cliente.getNombre(), cliente.getApellido1(), cliente.getApellido2(), cliente.getCiudad(), cliente.getCategoria());
     }
 
+    /**
+     * Recoge todos los clientes de la tabla cliente, crea un nuevo Objeto CLiente
+     * y este se inserta en la List<CLiente>
+     *
+     * @return List<Cliente> lsiado de cleintes encontrado
+     */
     @Override
     public List<Cliente> getAll() {
 
@@ -41,6 +51,11 @@ public class ClienteDAOImpl implements ClienteDAO {
         return listaClientes;
     }
 
+    /***
+     * Se busca un cliente por id y se recogen sus datos
+     * @param id, por el cual se busca el cliente
+     * @return Optional<Cliente>
+     */
     @Override
     public Optional<Cliente> find(int id) {
         Cliente cliente = jdbcTemplate
@@ -53,6 +68,10 @@ public class ClienteDAOImpl implements ClienteDAO {
         else return Optional.empty();
     }
 
+    /**
+     * Se actualizan los datos del ciente, menos el ID
+     * @param cliente, nuevo objeto con datos a cambiar de un cliente
+     */
     @Override
     public void update(Cliente cliente) {
         int rows = jdbcTemplate
@@ -60,6 +79,10 @@ public class ClienteDAOImpl implements ClienteDAO {
         if (rows == 0) System.out.println("Update de cliente con 0 registros actualizados.");
     }
 
+    /**
+     * Se borra un cliente por su ID
+     * @param id, para saber que cliente se debe borrar
+     */
     @Override
     public void delete(int id) {
         int rows = jdbcTemplate.update("DELETE FROM cliente WHERE id = ?", id);
@@ -69,7 +92,6 @@ public class ClienteDAOImpl implements ClienteDAO {
 
 
     public void create_SIN_RECARGA_DE_ID(Cliente cliente) {
-
 
         jdbcTemplate.update("""
                         INSERT INTO cliente
