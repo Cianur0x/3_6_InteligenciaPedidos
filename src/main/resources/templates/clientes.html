@@ -41,12 +41,12 @@
             </thead>
             <tbody>
             <tr th:each="cliente : ${listaClientes}">
-                <th scope="row" th:text="${cliente.id}">Título</th>
-                <td th:text="${cliente.nombre}">Título</td>
-                <td th:text="${cliente.apellido1}">Autor</td>
-                <td th:text="${cliente.apellido2}">Título</td>
-                <td th:text="${cliente.ciudad}">Autor</td>
-                <td th:text="${cliente.categoria}">Autor</td>
+                <th scope="row" th:text="${cliente.id}">id</th>
+                <td th:text="${cliente.nombre}">nombre</td>
+                <td th:text="${cliente.apellido1}">ape1</td>
+                <td th:text="${cliente.apellido2}">ape2</td>
+                <td th:text="${cliente.ciudad}">ciudad</td>
+                <td th:text="${cliente.categoria}">cat</td>
 
                 <td>
                     <form method="get" th:action="@{/clientes/editar/__${cliente.id}__}">
