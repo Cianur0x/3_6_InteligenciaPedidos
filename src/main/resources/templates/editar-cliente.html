@@ -9,11 +9,17 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.1/css/all.css"
+          integrity="sha384-O8whS3fhG2OnA5Kas0Y9l3cfpmYjapjI0E4theH4iuMD+pLhbf6JI0jIMfYcK3yZ" crossorigin="anonymous">
 </head>
 <body>
 <div class=" d-flex justify-content-center">
     <div class="w-25">
         <form th:action="@{/clientes/editar/__${cliente.id}__}" th:object="${cliente}" method="post">
+            <div class="form-group">
+                <label for="id">ID</label>
+                <input type="text" class="form-control" id="id" th:field="*{id}" placeholder="ID" readonly>
+            </div>
             <div class="form-group">
                 <label for="nombre">Nombre</label>
                 <input type="text" class="form-control" id="nombre" th:field="*{nombre}" placeholder="Nombre">
@@ -35,6 +41,7 @@
                 <label for="cat">Categoría</label>
                 <input type="text" class="form-control" id="cat" placeholder="Categoría" th:field="*{categoria}">
             </div>
+            <a href="/clientes" class="btn btn-info"> <i class="fas fa-arrow-left  "></i> Volver</a>
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>
     </div>

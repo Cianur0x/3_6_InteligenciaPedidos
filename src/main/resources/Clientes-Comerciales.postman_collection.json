@@ -1,12 +1,31 @@
 {
 	"info": {
-		"_postman_id": "e08278a7-a3e1-4d41-9195-21509069fa54",
+		"_postman_id": "91c02481-e269-4459-aa26-03befbe48a32",
 		"name": "Clientes/Comerciales",
-		"description": "Pruebas a todas las rutas de clientes y comerciales.\n\nAl borrar un cliente, puede las demas rutas no funcionen.",
+		"description": "Pruebas a todas las rutas de clientes y comerciales.",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "31450872"
+		"_exporter_id": "29438609"
 	},
 	"item": [
+		{
+			"name": "ruta inicial",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						""
+					]
+				}
+			},
+			"response": []
+		},
 		{
 			"name": "clientes",
 			"request": {
@@ -27,6 +46,25 @@
 			"response": []
 		},
 		{
+			"name": "clients",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/clients",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"clients"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "comerciales",
 			"request": {
 				"method": "GET",
@@ -40,6 +78,25 @@
 					"port": "8080",
 					"path": [
 						"comerciales"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "comercials",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/comercials",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"comercials"
 					]
 				}
 			},
@@ -78,14 +135,14 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8080/clientes/1",
+					"raw": "http://localhost:8080/comerciales/1",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "8080",
 					"path": [
-						"clientes",
+						"comerciales",
 						"1"
 					],
 					"query": [
@@ -125,14 +182,14 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8080/clientes/crear",
+					"raw": "http://localhost:8080/comerciales/crear",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "8080",
 					"path": [
-						"clientes",
+						"comerciales",
 						"crear"
 					]
 				}

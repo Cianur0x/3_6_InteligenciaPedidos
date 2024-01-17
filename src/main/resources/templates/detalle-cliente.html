@@ -16,10 +16,10 @@
         <div class="card" style="width: 18rem;">
 
             <div class="card-body">
-                <h5 class="card-title" th:text="${cliente.nombre}"></h5>
+                <h5 class="card-title" th:text="'ID: ' + ${cliente.id}"></h5>
             </div>
             <ul class="list-group list-group-flush">
-                <li class="list-group-item" th:text="${cliente.apellido1}">ape1</li>
+                <li class="list-group-item" th:text="${cliente.nombre}">ape1</li>
                 <li class="list-group-item" th:text="${cliente.apellido2}">ape2</li>
                 <li class="list-group-item" th:text="${cliente.ciudad}">city</li>
                 <li class="list-group-item" th:text="${cliente.categoria}">cat</li>

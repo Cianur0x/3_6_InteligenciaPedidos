@@ -16,9 +16,10 @@
         <div class="card" style="width: 18rem;">
 
             <div class="card-body">
-                <h5 class="card-title" th:text="${comercial.nombre}"></h5>
+                <h5 class="card-title" th:text="'ID: ' + ${comercial.id}"></h5>
             </div>
             <ul class="list-group list-group-flush">
+                <li class="list-group-item" th:text="${comercial.nombre}">ape1</li>
                 <li class="list-group-item" th:text="${comercial.apellido1}">ape1</li>
                 <li class="list-group-item" th:text="${comercial.apellido2}">ape2</li>
                 <li class="list-group-item" th:text="${comercial.comision}">city</li>

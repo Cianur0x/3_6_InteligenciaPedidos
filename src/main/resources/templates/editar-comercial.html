@@ -9,11 +9,17 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.1/css/all.css"
+          integrity="sha384-O8whS3fhG2OnA5Kas0Y9l3cfpmYjapjI0E4theH4iuMD+pLhbf6JI0jIMfYcK3yZ" crossorigin="anonymous">
 </head>
 <body>
 <div class=" d-flex justify-content-center">
     <div class="w-25">
         <form th:action="@{/comerciales/editar/__${comercial.id}__}" th:object="${comercial}" method="post">
+            <div class="form-group">
+                <label for="id">ID</label>
+                <input type="text" class="form-control" id="id" th:field="*{id}" placeholder="ID" readonly>
+            </div>
             <div class="form-group">
                 <label for="nombre">Nombre</label>
                 <input type="text" class="form-control" id="nombre" th:field="*{nombre}" placeholder="Nombre">
@@ -28,9 +34,10 @@
                        th:field="*{apellido2}">
             </div>
             <div class="form-group">
-                <label for="ciudad">Ciudad</label>
-                <input type="text" class="form-control" id="ciudad" placeholder="Ciudad" th:field="*{comision}">
+                <label for="com">Comisión</label>
+                <input type="text" class="form-control" id="com" placeholder="Comision" th:field="*{comision}">
             </div>
+            <a href="/comerciales" class="btn btn-info"> <i class="fas fa-arrow-left  "></i> Volver</a>
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>
     </div>
