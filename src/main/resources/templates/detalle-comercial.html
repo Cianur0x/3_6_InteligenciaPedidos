@@ -40,19 +40,23 @@
             <thead>
             <tr>
                 <th scope="col">ID Comercial</th>
-                <th scope="col">ID</th>
+                <th scope="col">ID Pedido</th>
                 <th scope="col">Total</th>
                 <th scope="col">Fecha</th>
                 <th scope="col">ID Cliente</th>
+                <th scope="col">Nombre Cliente</th>
             </tr>
             </thead>
             <tbody>
             <tr th:each="pedido : ${pedidosLista}">
-                <th scope="row" th:text="${pedido.idComercial}">Autor</th>
+                <th scope="row" th:text="${pedido.comercial.id}">Autor</th>
                 <td th:text="${pedido.id}">Título</td>
                 <td th:text="${pedido.total}">Título</td>
                 <td th:text="${pedido.fecha}">Autor</td>
-                <td th:text="${pedido.idCliente}">Título</td>
+                <td th:text="${pedido.cliente.id}">Título</td>
+                <td>
+                    <a th:href="@{/clientes/__${pedido.cliente.id}__}" th:text="${pedido.cliente.nombre}"></a>
+                </td>
             </tr>
             </tbody>
         </table>

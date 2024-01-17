@@ -18,23 +18,23 @@ public interface PedidoDAO {
 
     public Optional<Comercial> findComercialBy(int pedidoId);
 
-    public static Pedido newPedido(ResultSet rs) throws SQLException {
-        return new Pedido(rs.getInt("id"),
-                rs.getDouble("total"),
-                rs.getDate("fecha").toLocalDate(),
-                new Cliente(rs.getInt("C.id"),
-                        rs.getString("C.nombre"),
-                        rs.getString("C.apellido1"),
-                        rs.getString("C.apellido2"),
-                        rs.getString("C.ciudad"),
-                        rs.getInt("C.categoría")
-                ),
-                new Comercial(rs.getInt("CO.id"),
-                        rs.getString("CO.nombre"),
-                        rs.getString("CO.apellido1"),
-                        rs.getString("CO.apellido2"),
-                        rs.getDouble("CO.comisión")
-                )
-        );
-    }
+//    public static Pedido newPedido(ResultSet rs) throws SQLException {
+//        return new Pedido(rs.getInt("id"),
+//                rs.getDouble("total"),
+//                rs.getDate("fecha").toLocalDate(),
+//                new Cliente(rs.getInt("C.id"),
+//                        rs.getString("C.nombre"),
+//                        rs.getString("C.apellido1"),
+//                        rs.getString("C.apellido2"),
+//                        rs.getString("C.ciudad"),
+//                        rs.getInt("C.categoría")
+//                ),
+//                new Comercial(rs.getInt("CO.id"),
+//                        rs.getString("CO.nombre"),
+//                        rs.getString("CO.apellido1"),
+//                        rs.getString("CO.apellido2"),
+//                        rs.getDouble("CO.comisión")
+//                )
+//        );
+//    }
 }

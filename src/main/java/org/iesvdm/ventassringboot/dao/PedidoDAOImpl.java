@@ -4,7 +4,6 @@ import org.iesvdm.ventassringboot.domain.Cliente;
 import org.iesvdm.ventassringboot.domain.Comercial;
 import org.iesvdm.ventassringboot.domain.Pedido;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -28,21 +27,46 @@ public class PedidoDAOImpl implements PedidoDAO {
 
     @Override
     public List<Pedido> getPedidosFromComercial(int id) {
-        List<Pedido> comercialPedList = jdbcTemplate.query("SELECT * FROM pedido WHERE id_comercial = ?",
-                (rs, rowNum) -> new Pedido(rs.getInt("id"), rs.getDouble("total"), rs.getDate("fecha").toLocalDate(), rs.getInt("id_cliente"), rs.getInt("id_comercial"))
-                , id);
+        List<Pedido> comercialPedList = jdbcTemplate.query("""
+                        select  * from pedido as P left join cliente as C on P.id_cliente = C.id left join comercial co on P.id_comercial = co.id WHERE co.id = ?;
+
+                        """,
+                (rs, rowNum) -> new Pedido(rs.getInt("id"),
+                        rs.getDouble("total"),
+                        rs.getDate("fecha").toLocalDate(),
+                        new Cliente(rs.getInt("C.id"),
+                                rs.getString("C.nombre"),
+                                rs.getString("C.apellido1"),
+                                rs.getString("C.apellido2"),
+                                rs.getString("C.ciudad"),
+                                rs.getInt("C.categoría")
+                        ),
+                        new Comercial(rs.getInt("CO.id"),
+                                rs.getString("CO.nombre"),
+                                rs.getString("CO.apellido1"),
+                                rs.getString("CO.apellido2"),
+                                rs.getDouble("CO.comisión")
+                        )), id);
         return comercialPedList;
+
+
     }
 
     @Override
     public Optional<Cliente> findClienteBy(int pedidoId) {
-
-//        Optional<Cliente> cliente = this.jdbcTemplate.queryForObject("select C.* from pedido P join cliente C on P"
-//                , (rs, rowNum) -> new Cliente(rs.getInt("id"), rs.getString("nombre"), rs.getString("apellido1"), rs.getString("apellido2"), rs.getString("ciudad"), rs.getInt("categoría"))
-//        );
-
-        return null;
+        return Optional.empty();
     }
+
+//    @Override
+//    public Optional<Cliente> findClienteBy(int pedidoId) {
+//
+//        Optional<Cliente> cliente = Optional.ofNullable(
+//                jdbcTemplate.queryForObject("SELECT c.* FROM pedido p join cliente c on p.id_cliente = c.id where p.id = ?",
+//                        (rs, rowNum) -> new Cliente(rs.getInt("id"), rs.getString("nombre"), rs.getString("apellido1"), rs.getString("apellido2"), rs.getString("ciudad"), rs.getInt("categoría"))
+//                        , pedidoId));
+//
+//        return cliente;
+//    }
 
     @Override
     public Optional<Comercial> findComercialBy(int pedidoId) {

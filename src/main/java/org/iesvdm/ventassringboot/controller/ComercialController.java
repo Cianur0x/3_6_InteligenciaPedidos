@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.view.RedirectView;
 
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 // @RequestMapping("/comerciales")
@@ -41,8 +42,9 @@ public class ComercialController {
         Comercial comercial = comercialService.one(id);
         model.addAttribute("comercial", comercial);
 
-//        List<Pedido> pedidos =
-//        model.addAttribute("pedidosLista", pedidos);
+        List<Pedido> pedidos = comercialService.pedidosFromCOmercial(id);
+        model.addAttribute("pedidosLista", pedidos);
+
 
         return "detalle-comercial";
 

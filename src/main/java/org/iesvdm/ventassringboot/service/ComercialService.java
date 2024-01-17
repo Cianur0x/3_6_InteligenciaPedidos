@@ -30,8 +30,8 @@ public class ComercialService {
     }
 
     public List<Pedido> pedidosFromCOmercial(int id) {
-
-        return null;
+        List<Pedido> pedidos = pedidoDAO.getPedidosFromComercial(id);
+        return pedidos;
     }
 
     public void newComercial(Comercial cliente) {
