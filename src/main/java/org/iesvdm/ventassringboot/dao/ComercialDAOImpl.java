@@ -1,6 +1,7 @@
 package org.iesvdm.ventassringboot.dao;
 
 import org.iesvdm.ventassringboot.domain.Comercial;
+import org.iesvdm.ventassringboot.domain.Pedido;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 

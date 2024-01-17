@@ -30,6 +30,33 @@
         </form>
     </div>
 </div>
+<div class="d-flex justify-content-center">
+    <div class="w-75">
+        <div class="row d-flex justify-content-center align-items-center">
+            <h1 class="text-center">Pedidos</h1>
+        </div>
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th scope="col">ID Comercial</th>
+                <th scope="col">ID</th>
+                <th scope="col">Total</th>
+                <th scope="col">Fecha</th>
+                <th scope="col">ID Cliente</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="pedido : ${pedidosLista}">
+                <th scope="row" th:text="${pedido.idComercial}">Autor</th>
+                <td th:text="${pedido.id}">Título</td>
+                <td th:text="${pedido.total}">Título</td>
+                <td th:text="${pedido.fecha}">Autor</td>
+                <td th:text="${pedido.idCliente}">Título</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"

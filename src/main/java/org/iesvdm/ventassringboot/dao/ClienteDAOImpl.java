@@ -35,7 +35,7 @@ public class ClienteDAOImpl implements ClienteDAO {
 
         List<Cliente> listaClientes = jdbcTemplate.query(
                 "SELECT * FROM cliente",
-                (rs, rowNum) -> new Cliente(rs.getInt("id"), rs.getString("nombre"), rs.getString("apellido1"), rs.getString("apellido2"), rs.getString("ciudad"), rs.getString("categoría"))
+                (rs, rowNum) -> new Cliente(rs.getInt("id"), rs.getString("nombre"), rs.getString("apellido1"), rs.getString("apellido2"), rs.getString("ciudad"), rs.getInt("categoría"))
         );
 
         return listaClientes;
@@ -45,7 +45,7 @@ public class ClienteDAOImpl implements ClienteDAO {
     public Optional<Cliente> find(int id) {
         Cliente cliente = jdbcTemplate
                 .queryForObject("SELECT * FROM cliente WHERE id = ?"
-                        , (rs, rowNum) -> new Cliente(rs.getInt("id"), rs.getString("nombre"), rs.getString("apellido1"), rs.getString("apellido2"), rs.getString("ciudad"), rs.getString("categoría"))
+                        , (rs, rowNum) -> new Cliente(rs.getInt("id"), rs.getString("nombre"), rs.getString("apellido1"), rs.getString("apellido2"), rs.getString("ciudad"), rs.getInt("categoría"))
                         , id
                 );
 
@@ -104,7 +104,7 @@ public class ClienteDAOImpl implements ClienteDAO {
             ps.setString(idx++, cliente.getApellido1());
             ps.setString(idx++, cliente.getApellido2());
             ps.setString(idx++, cliente.getCiudad());
-            ps.setInt(idx++, Integer.parseInt(cliente.getCategoria()));
+            ps.setInt(idx++, cliente.getCategoria());
             return ps;
         }, keyHolder);
         //SE ACTUALIZA EL ID AUTO_INCREMENT DE MYSQL EN EL BEAN DE CLIENTE MEDIANTE EL KEYHOLDER

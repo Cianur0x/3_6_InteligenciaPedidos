@@ -14,7 +14,6 @@ public class ClienteService {
     private ClienteDAO clienteDAO;
 
     public List<Cliente> listAll() {
-
         return clienteDAO.getAll();
     }
 
@@ -24,12 +23,10 @@ public class ClienteService {
     }
 
     public void newCliente(Cliente cliente) {
-
         clienteDAO.create(cliente);
     }
 
     public void replaceCliente(Cliente cliente) {
-
         clienteDAO.update(cliente);
     }
 

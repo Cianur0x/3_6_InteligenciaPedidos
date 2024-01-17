@@ -2,6 +2,7 @@ package org.iesvdm.ventassringboot.controller;
 
 import org.iesvdm.ventassringboot.domain.Cliente;
 import org.iesvdm.ventassringboot.domain.Comercial;
+import org.iesvdm.ventassringboot.domain.Pedido;
 import org.iesvdm.ventassringboot.service.ComercialService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -39,6 +40,9 @@ public class ComercialController {
 
         Comercial comercial = comercialService.one(id);
         model.addAttribute("comercial", comercial);
+
+//        List<Pedido> pedidos =
+//        model.addAttribute("pedidosLista", pedidos);
 
         return "detalle-comercial";
 
