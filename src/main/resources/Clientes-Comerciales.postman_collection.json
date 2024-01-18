@@ -65,6 +65,269 @@
 			"response": []
 		},
 		{
+			"name": "clientes/id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/clientes/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"clientes",
+						"1"
+					],
+					"query": [
+						{
+							"key": "",
+							"value": null,
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "clientes/crear",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/clientes/crear",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"clientes",
+						"crear"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "clientes/editar",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/clientes/editar/5",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"clientes",
+						"editar",
+						"5"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "clientes/borrar",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/clientes/borrar/9",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"clientes",
+						"borrar",
+						"9"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "clientes/editar/4",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "id",
+							"value": "4",
+							"type": "text"
+						},
+						{
+							"key": "Nombre",
+							"value": "Adrián",
+							"type": "text"
+						},
+						{
+							"key": "Apellido1",
+							"value": "Suárez",
+							"type": "text"
+						},
+						{
+							"key": "Apellido2",
+							"value": "Quilo",
+							"type": "text"
+						},
+						{
+							"key": "Ciudad",
+							"value": "Jaén",
+							"type": "text"
+						},
+						{
+							"key": "categoria",
+							"value": "9898",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8080/clientes/editar/4",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"clientes",
+						"editar",
+						"4"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "clientes/crear/form",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "nombre",
+							"value": "Marcos",
+							"type": "text"
+						},
+						{
+							"key": "Apellido1",
+							"value": "Ángle",
+							"type": "text"
+						},
+						{
+							"key": "Apellido2",
+							"value": "Perez",
+							"type": "text"
+						},
+						{
+							"key": "Ciudad",
+							"value": "Málaga",
+							"type": "text"
+						},
+						{
+							"key": "categoria",
+							"value": "502",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8080/clientes/crear",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"clientes",
+						"crear"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "comerciales/crear",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/comerciales/crear",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"comerciales",
+						"crear"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "comerciales/editar",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/comerciales/editar/5",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"comerciales",
+						"editar",
+						"5"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "comerciales/id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/comerciales/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"comerciales",
+						"1"
+					],
+					"query": [
+						{
+							"key": "",
+							"value": null,
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "comerciales",
 			"request": {
 				"method": "GET",
@@ -103,125 +366,40 @@
 			"response": []
 		},
 		{
-			"name": "clientes/id",
+			"name": "comerciales/editar/",
 			"request": {
-				"method": "GET",
+				"method": "POST",
 				"header": [],
-				"url": {
-					"raw": "http://localhost:8080/clientes/1",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"clientes",
-						"1"
-					],
-					"query": [
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
 						{
-							"key": "",
-							"value": null,
-							"disabled": true
+							"key": "id",
+							"value": "5",
+							"type": "text"
+						},
+						{
+							"key": "Nombre",
+							"value": "Adrián",
+							"type": "text"
+						},
+						{
+							"key": "Apellido1",
+							"value": "Suárez",
+							"type": "text"
+						},
+						{
+							"key": "Apellido2",
+							"value": "Quilo",
+							"type": "text"
+						},
+						{
+							"key": "comision",
+							"value": "0.2",
+							"type": "text"
 						}
 					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "comerciales/id",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "http://localhost:8080/comerciales/1",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"comerciales",
-						"1"
-					],
-					"query": [
-						{
-							"key": "",
-							"value": null,
-							"disabled": true
-						}
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "clientes/crear",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "http://localhost:8080/clientes/crear",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"clientes",
-						"crear"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "comerciales/crear",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "http://localhost:8080/comerciales/crear",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"comerciales",
-						"crear"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "clientes/editar",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "http://localhost:8080/clientes/editar/5",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"clientes",
-						"editar",
-						"5"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "comerciales/editar",
-			"request": {
-				"method": "GET",
-				"header": [],
+				},
 				"url": {
 					"raw": "http://localhost:8080/comerciales/editar/5",
 					"protocol": "http",
@@ -233,27 +411,6 @@
 						"comerciales",
 						"editar",
 						"5"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "clientes/borrar",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"url": {
-					"raw": "http://localhost:8080/clientes/borrar/9",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"clientes",
-						"borrar",
-						"9"
 					]
 				}
 			},
@@ -275,6 +432,51 @@
 						"comerciales",
 						"borrar",
 						"9"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "comerciales/crear/form",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "nombre",
+							"value": "Marcos",
+							"type": "text"
+						},
+						{
+							"key": "Apellido1",
+							"value": "Ángle",
+							"type": "text"
+						},
+						{
+							"key": "Apellido2",
+							"value": "Perez",
+							"type": "text"
+						},
+						{
+							"key": "comision",
+							"value": "0.25",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8080/comerciales/crear",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"comerciales",
+						"crear"
 					]
 				}
 			},
