@@ -10,11 +10,16 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public class PedidoDAOImpl implements PedidoDAO {
+public class PedidoDAOImpl implements PedidoDAO<Pedido> {
     private final JdbcTemplate jdbcTemplate;
 
     public PedidoDAOImpl(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
+    }
+
+    @Override
+    public void create(Pedido pedido) {
+
     }
 
     @Override
@@ -26,10 +31,24 @@ public class PedidoDAOImpl implements PedidoDAO {
     }
 
     @Override
+    public Optional<Pedido> find(int id) {
+        return Optional.empty();
+    }
+
+    @Override
+    public void update(Pedido pedido) {
+
+    }
+
+    @Override
+    public void delete(int id) {
+
+    }
+
+    @Override
     public List<Pedido> getPedidosFromComercial(int id) {
         List<Pedido> comercialPedList = jdbcTemplate.query("""
                         select  * from pedido as P left join cliente as C on P.id_cliente = C.id left join comercial co on P.id_comercial = co.id WHERE co.id = ?;
-
                         """,
                 (rs, rowNum) -> new Pedido(rs.getInt("id"),
                         rs.getDouble("total"),
@@ -47,9 +66,8 @@ public class PedidoDAOImpl implements PedidoDAO {
                                 rs.getString("CO.apellido2"),
                                 rs.getDouble("CO.comisión")
                         )), id);
+
         return comercialPedList;
-
-
     }
 
     @Override

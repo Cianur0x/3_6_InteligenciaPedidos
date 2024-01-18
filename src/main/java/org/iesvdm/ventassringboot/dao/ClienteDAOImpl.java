@@ -15,11 +15,8 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public class ClienteDAOImpl implements ClienteDAO {
-
-
+public class ClienteDAOImpl implements ClienteDAO<Cliente> {
     private final JdbcTemplate jdbcTemplate;
-
 
     public ClienteDAOImpl(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
@@ -27,6 +24,7 @@ public class ClienteDAOImpl implements ClienteDAO {
 
     /**
      * Se inserta un nuevo cliente en la base de datos
+     *
      * @param cliente, objeto que se recoge en un formulario
      */
     @Override
@@ -70,17 +68,19 @@ public class ClienteDAOImpl implements ClienteDAO {
 
     /**
      * Se actualizan los datos del ciente, menos el ID
+     *
      * @param cliente, nuevo objeto con datos a cambiar de un cliente
      */
     @Override
     public void update(Cliente cliente) {
         int rows = jdbcTemplate
-                .update("UPDATE cliente SET nombre = ? , apellido1 = ?, apellido2 = ?, categoría = ?  WHERE id = ?", cliente.getNombre(), cliente.getApellido1(), cliente.getApellido2(), cliente.getCategoria(), cliente.getId());
+                .update("UPDATE cliente SET nombre = ? , apellido1 = ?, apellido2 = ?, ciudad = ?, categoría = ?  WHERE id = ?", cliente.getNombre(), cliente.getApellido1(), cliente.getApellido2(), cliente.getCiudad(), cliente.getCategoria(), cliente.getId());
         if (rows == 0) System.out.println("Update de cliente con 0 registros actualizados.");
     }
 
     /**
      * Se borra un cliente por su ID
+     *
      * @param id, para saber que cliente se debe borrar
      */
     @Override
@@ -104,8 +104,6 @@ public class ClienteDAOImpl implements ClienteDAO {
                 , cliente.getApellido2()
                 , cliente.getCiudad()
                 , cliente.getCategoria());
-
-
         //NO SE ACTUALIZA EL ID AUTO_INCREMENT DE MYSQL EN EL BEAN DE CLIENTE
     }
 
@@ -129,6 +127,7 @@ public class ClienteDAOImpl implements ClienteDAO {
             ps.setInt(idx++, cliente.getCategoria());
             return ps;
         }, keyHolder);
+
         //SE ACTUALIZA EL ID AUTO_INCREMENT DE MYSQL EN EL BEAN DE CLIENTE MEDIANTE EL KEYHOLDER
         cliente.setId(keyHolder.getKey().intValue());
     }
@@ -149,6 +148,5 @@ public class ClienteDAOImpl implements ClienteDAO {
 
         cliente.setId(number.intValue());
     }
-
 
 }

@@ -6,15 +6,6 @@ import org.iesvdm.ventassringboot.domain.Pedido;
 import java.util.List;
 import java.util.Optional;
 
-public interface ComercialDAO {
-    public void create(Comercial comercial);
-
-    public List<Comercial> getAll();
-
-    public Optional<Comercial> find(int id);
-
-    public void update(Comercial comercial);
-
-    public void delete(int id);
+public interface ComercialDAO<Comercial> extends RepositoryBase<Comercial> {
 
 }
