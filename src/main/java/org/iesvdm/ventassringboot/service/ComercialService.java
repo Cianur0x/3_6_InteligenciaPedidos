@@ -12,13 +12,10 @@ import java.util.Optional;
 
 @Service
 public class ComercialService {
-    private final ComercialDAO comercialDAO;
-    private final PedidoDAO pedidoDAO;
-
-    public ComercialService(ComercialDAO comercialDAO, PedidoDAO pedidoDAO) {
-        this.comercialDAO = comercialDAO;
-        this.pedidoDAO = pedidoDAO;
-    }
+    @Autowired
+    private ComercialDAO<Comercial> comercialDAO;
+    @Autowired
+    private PedidoDAO<Pedido> pedidoDAO;
 
     public List<Comercial> listAll() {
         return comercialDAO.getAll();
@@ -30,8 +27,7 @@ public class ComercialService {
     }
 
     public List<Pedido> pedidosFromCOmercial(int id) {
-        List<Pedido> pedidos = pedidoDAO.getPedidosFromComercial(id);
-        return pedidos;
+        return pedidoDAO.getPedidosFromComercial(id);
     }
 
     public void newComercial(Comercial cliente) {

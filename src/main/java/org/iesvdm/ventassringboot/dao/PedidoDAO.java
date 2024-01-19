@@ -15,5 +15,4 @@ public interface PedidoDAO<Pedido> extends RepositoryBase<Pedido> {
     public Optional<Cliente> findClienteBy(int pedidoId);
 
     public Optional<Comercial> findComercialBy(int pedidoId);
-
 }

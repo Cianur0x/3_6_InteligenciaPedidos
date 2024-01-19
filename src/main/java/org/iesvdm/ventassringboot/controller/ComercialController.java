@@ -4,6 +4,7 @@ import org.iesvdm.ventassringboot.domain.Cliente;
 import org.iesvdm.ventassringboot.domain.Comercial;
 import org.iesvdm.ventassringboot.domain.Pedido;
 import org.iesvdm.ventassringboot.service.ComercialService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -16,11 +17,8 @@ import java.util.Optional;
 // @RequestMapping("/comerciales")
 public class ComercialController {
     // Field injection is not recommended cuando usamos el @Autowired
-    private final ComercialService comercialService;
-
-    public ComercialController(ComercialService comercialService) {
-        this.comercialService = comercialService;
-    }
+    @Autowired
+    private ComercialService comercialService;
 
     @GetMapping(value = "/")
     public String index() {
@@ -45,9 +43,7 @@ public class ComercialController {
         List<Pedido> pedidos = comercialService.pedidosFromCOmercial(id);
         model.addAttribute("pedidosLista", pedidos);
 
-
         return "detalle-comercial";
-
     }
 
     @GetMapping("/comerciales/crear")
@@ -57,7 +53,6 @@ public class ComercialController {
         model.addAttribute("comercial", comercial);
 
         return "crear-comercial";
-
     }
 
     @PostMapping("/comerciales/crear")

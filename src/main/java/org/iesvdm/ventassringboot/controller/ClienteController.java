@@ -2,6 +2,7 @@ package org.iesvdm.ventassringboot.controller;
 
 import org.iesvdm.ventassringboot.domain.Cliente;
 import org.iesvdm.ventassringboot.service.ClienteService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -13,11 +14,8 @@ import java.util.List;
 // @RequestMapping("/clientes")
 public class ClienteController {
     // Field injection is not recommended cuando usamos el @Autowired
-    private final ClienteService clienteService;
-
-    public ClienteController(ClienteService clienteService) {
-        this.clienteService = clienteService;
-    }
+    @Autowired
+    private ClienteService clienteService;
 
     @GetMapping({"/clientes", "/clients"})
     public String listar(Model model) {
@@ -35,7 +33,6 @@ public class ClienteController {
         model.addAttribute("cliente", cliente);
 
         return "detalle-cliente";
-
     }
 
     @GetMapping("/clientes/crear")
@@ -45,13 +42,12 @@ public class ClienteController {
         model.addAttribute("cliente", cliente);
 
         return "crear-cliente";
-
     }
 
     @PostMapping("/clientes/crear")
     public RedirectView submitCrear(@ModelAttribute("cliente") Cliente cliente) {
 
-        clienteService.newCliente(cliente);
+        clienteService.create(cliente);
 
         return new RedirectView("/clientes");
     }
@@ -69,7 +65,7 @@ public class ClienteController {
     @PostMapping("/clientes/editar/{id}")
     public RedirectView submitEditar(@ModelAttribute("cliente") Cliente cliente) {
 
-        clienteService.replaceCliente(cliente);
+        clienteService.replace(cliente);
 
         return new RedirectView("/clientes");
     }
@@ -77,7 +73,7 @@ public class ClienteController {
     @PostMapping("/clientes/borrar/{id}")
     public RedirectView submitBorrar(@PathVariable Integer id) {
 
-        clienteService.deleteCliente(id);
+        clienteService.delete(id);
 
         return new RedirectView("/clientes");
     }

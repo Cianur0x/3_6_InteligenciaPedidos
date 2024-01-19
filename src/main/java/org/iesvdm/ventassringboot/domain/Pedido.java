@@ -2,12 +2,14 @@ package org.iesvdm.ventassringboot.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.cglib.core.Local;
 
 import java.time.LocalDate;
 
 @Data
 @AllArgsConstructor
+@NoArgsConstructor
 public class Pedido {
     private int id;
     private Double total;
@@ -16,10 +18,6 @@ public class Pedido {
     private int idComercial;
     private Cliente cliente;
     private Comercial comercial;
-
-    public Pedido() {
-
-    }
 
     public Pedido(int id, Double total, LocalDate fecha, int idCliente, int idComercial) {
         this.id = id;

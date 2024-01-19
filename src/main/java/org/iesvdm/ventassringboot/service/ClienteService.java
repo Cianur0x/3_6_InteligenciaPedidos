@@ -9,29 +9,32 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class ClienteService {
+public class ClienteService implements ServiceBase<Cliente> {
     @Autowired
-    private ClienteDAO clienteDAO;
+    private ClienteDAO<Cliente> clienteDAO;
 
     public List<Cliente> listAll() {
         return clienteDAO.getAll();
     }
 
-    public Cliente one(Integer id) {
+    @Override
+    public Cliente one(int id) {
         Optional<Cliente> optFab = clienteDAO.find(id);
         return optFab.orElse(null);
     }
 
-    public void newCliente(Cliente cliente) {
+    @Override
+    public void create(Cliente cliente) {
         clienteDAO.create(cliente);
     }
 
-    public void replaceCliente(Cliente cliente) {
+    @Override
+    public void replace(Cliente cliente) {
         clienteDAO.update(cliente);
     }
 
-    public void deleteCliente(int id) {
-
+    @Override
+    public void delete(int id) {
         clienteDAO.delete(id);
     }
 
