@@ -1,17 +1,19 @@
 package org.iesvdm.ventassringboot.controller;
 
-import org.iesvdm.ventassringboot.domain.Cliente;
 import org.iesvdm.ventassringboot.domain.Comercial;
 import org.iesvdm.ventassringboot.domain.Pedido;
 import org.iesvdm.ventassringboot.service.ComercialService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.view.RedirectView;
 
+import java.util.Comparator;
 import java.util.List;
-import java.util.Optional;
 
 @Controller
 // @RequestMapping("/comerciales")
@@ -40,8 +42,15 @@ public class ComercialController {
         Comercial comercial = comercialService.one(id);
         model.addAttribute("comercial", comercial);
 
-        List<Pedido> pedidos = comercialService.pedidosFromCOmercial(id);
-        model.addAttribute("pedidosLista", pedidos);
+        List<Pedido> pedidos = comercialService.pedidosFromComercial(id);
+        var ordenPedidos = pedidos.stream().sorted(Comparator.comparing(Pedido::getTotal));
+        model.addAttribute("pedidosLista", ordenPedidos);
+
+        var sum = pedidos.stream().mapToDouble(Pedido::getTotal).sum();
+        model.addAttribute("total", sum);
+
+        var media = pedidos.stream().mapToDouble(Pedido::getTotal).sum() / pedidos.size();
+        model.addAttribute("media", media);
 
         return "detalle-comercial";
     }

@@ -26,7 +26,7 @@ public class ComercialService {
         return optFab.orElse(null);
     }
 
-    public List<Pedido> pedidosFromCOmercial(int id) {
+    public List<Pedido> pedidosFromComercial(int id) {
         return pedidoDAO.getPedidosFromComercial(id);
     }
 

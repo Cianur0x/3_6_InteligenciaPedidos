@@ -25,6 +25,8 @@
                 <li class="list-group-item" th:text="${comercial.apellido1}">ape1</li>
                 <li class="list-group-item" th:text="${comercial.apellido2}">ape2</li>
                 <li class="list-group-item" th:text="${comercial.comision}">city</li>
+                <li class="list-group-item" th:text="${total}">city</li>
+                <li class="list-group-item" th:text="${media}">city</li>
             </ul>
 
         </div>
@@ -41,7 +43,7 @@
         <table class="table table-striped">
             <thead>
             <tr>
-                <th scope="col"  th:text="#{pediCom}">ID Comercial</th>
+                <th scope="col" th:text="#{pediCom}">ID Comercial</th>
                 <th scope="col" th:text="#{idPedido}">ID Pedido</th>
                 <th scope="col" th:text="#{totalPed}">Total</th>
                 <th scope="col" th:text="#{fechaPed}">Fecha</th>
@@ -50,7 +52,9 @@
             </tr>
             </thead>
             <tbody>
-            <tr th:each="pedido : ${pedidosLista}">
+            <!-- TODO saber como meter una condicional para cada caso -->
+            <tr th:each="pedido, iStat : ${pedidosLista}" th:class="${iStat.first} ? 'bg-info' : 'ola'"
+                th:classappend="${iStat.last} ? 'bg-danger' :'ola2'">
                 <th scope="row" th:text="${pedido.comercial.id}">Autor</th>
                 <td th:text="${pedido.id}">Título</td>
                 <td th:text="${pedido.total}">Título</td>
