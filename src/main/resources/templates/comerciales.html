@@ -19,20 +19,22 @@
 <div class="d-flex justify-content-center">
     <div class="w-75">
         <div class="row d-flex justify-content-center align-items-center">
-            <h1 class="text-center">Comerciales</h1>
+            <h1 class="text-center" th:text="#{comercial}">Comerciales</h1>
             <form th:action="@{/comerciales/crear}" class="p-3">
                 <input type="hidden" name="id"/>
-                <button type="submit" class="btn btn-primary"><i class="fas fa-plus-square"></i> &ensp;Crear</button>
+                <button type="submit" class="btn btn-primary"><i class="fas fa-plus-square"></i>&ensp;
+                    <th:block th:text="#{btnCrear}"></th:block>
+                </button>
             </form>
         </div>
         <table class="table table-striped">
             <thead>
             <tr>
                 <th scope="col">ID</th>
-                <th scope="col">Nombre</th>
-                <th scope="col">Apellido1</th>
-                <th scope="col">Apellido2</th>
-                <th scope="col">Comisión</th>
+                <th scope="col" th:text="#{nombre}">Nombre</th>
+                <th scope="col" th:text="#{apell1}">Apellido1</th>
+                <th scope="col" th:text="#{apell2}">Apellido2</th>
+                <th scope="col" th:text="#{comercialCom}">Comisión</th>
                 <th></th>
                 <th></th>
                 <th></th>
@@ -49,20 +51,24 @@
                 <td>
                     <form method="get" th:action="@{/comerciales/editar/__${comercial.id}__}">
                         <input type="hidden" name="id"/>
-                        <button type="submit" class="btn btn-secondary"><i class="fas fa-pen"></i>&ensp;Editar</button>
+                        <button type="submit" class="btn btn-secondary"><i class="fas fa-pen"></i>&ensp;
+                            <th:block th:text="#{btnEditar}"></th:block>
+                        </button>
                     </form>
                 </td>
                 <td>
                     <form method="get" th:action="@{/comerciales/__${comercial.id}__}">
                         <input type="hidden" name="id"/>
-                        <button type="submit" class="btn btn-info"><i class="fas fa-info"></i>&ensp;Ver Detalles
+                        <button type="submit" class="btn btn-info"><i class="fas fa-info"></i>&ensp;
+                            <th:block th:text="#{btnDetalle}"></th:block>
                         </button>
                     </form>
                 </td>
                 <td>
                     <form th:method="post" th:action="@{/comerciales/borrar/__${comercial.id}__}">
                         <button type="button" class="btn btn-danger" data-toggle="modal"
-                                th:data-target="'#modal' + ${comercial.id}"><i class="fas fa-trash"></i>&ensp;Borrar
+                                th:data-target="'#modal' + ${comercial.id}"><i class="fas fa-trash"></i>&ensp;
+                            <th:block th:text="#{btnBorrar}"></th:block>
                         </button>
                         <!-- Modal -->
                         <div class="modal fade" th:id="'modal' + ${comercial.id}" tabindex="-1" role="dialog"
@@ -70,21 +76,25 @@
                             <div class="modal-dialog modal-dialog-centered" role="document">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLongTitle">¿Está seguro de que quiere
+                                        <h5 class="modal-title" id="exampleModalLongTitle" th:text="#{msgCoBorrar}">
+                                            ¿Está seguro de que quiere
                                             borrar este comercial?</h5>
                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                             <span aria-hidden="true">&times;</span>
                                         </button>
                                     </div>
 
-                                    <div class="modal-body" th:text="'Cliente con ID: '+ ${comercial.id}">
+                                    <div class="modal-body" th:text=" #{msgCoBorrarID}+' '+ ${comercial.id}">
 
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal"
+                                                th:text="#{msgCancel}">
                                             No, cancelar.
                                         </button>
-                                        <button type="submit" class="btn btn-primary">Sí, continuar.</button>
+                                        <button type="submit" class="btn btn-primary" th:text="#{msgYes}">Sí,
+                                            continuar.
+                                        </button>
                                     </div>
                                 </div>
                             </div>

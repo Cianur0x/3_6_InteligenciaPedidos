@@ -21,28 +21,32 @@
                 <input type="text" class="form-control" id="id" th:field="*{id}" placeholder="ID" readonly>
             </div>
             <div class="form-group">
-                <label for="nombre">Nombre</label>
+                <label for="nombre" th:text="#{nombre}"></label>
                 <input type="text" class="form-control" id="nombre" th:field="*{nombre}" placeholder="Nombre">
             </div>
             <div class="form-group">
-                <label for="ape1">Apellido1</label>
+                <label for="ape1" th:text="#{apell1}"></label>
                 <input type="text" class="form-control" id="ape1" th:field="*{apellido1}" placeholder="Primer Apellido">
             </div>
             <div class="form-group">
-                <label for="ape2">Apellido2</label>
+                <label for="ape2" th:text="#{apell2}"></label>
                 <input type="text" class="form-control" id="ape2" placeholder="Segundo Apellido"
                        th:field="*{apellido2}">
             </div>
             <div class="form-group">
-                <label for="ciudad">Ciudad</label>
+                <label for="ciudad" th:text="#{clienteCiudad}"></label>
                 <input type="text" class="form-control" id="ciudad" placeholder="Ciudad" th:field="*{ciudad}">
             </div>
             <div class="form-group">
-                <label for="cat">Categoría</label>
+                <label for="cat" th:text="#{clienteCat}">Categoría</label>
                 <input type="text" class="form-control" id="cat" placeholder="Categoría" th:field="*{categoria}">
             </div>
-            <a href="/clientes" class="btn btn-info"> <i class="fas fa-arrow-left  "></i> Volver</a>
-            <button type="submit" class="btn btn-primary">Submit</button>
+            <a href="/clientes" class="btn btn-info"> <i class="fas fa-arrow-left  "></i>
+                <th:block th:text="#{btnVolver}"></th:block>
+            </a>
+            <button type="submit" class="btn btn-primary"><i class="fas fa-paper-plane  "></i>
+                <th:block th:text="#{btnEnviar}"></th:block>
+            </button>
         </form>
     </div>
 </div>

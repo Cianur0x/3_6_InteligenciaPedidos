@@ -37,11 +37,12 @@
                 <label for="com" th:text="#{comercialCom}">Comisión</label>
                 <input type="text" class="form-control" id="com" placeholder="Comision" th:field="*{comision}">
             </div>
-            <div class="btn btn-info">
-                <i class="fas fa-arrow-left"></i>
-                <a href="/comerciales" th:text="#{btnVolver}" class="text-white"></a>
-            </div>
-            <button type="submit" class="btn btn-primary" th:text="#{btnEnviar}"></button>
+            <a href="/comerciales" class="btn btn-info"> <i class="fas fa-arrow-left  "></i>
+                <th:block th:text="#{btnVolver}"></th:block>
+            </a>
+            <button type="submit" class="btn btn-primary"><i class="fas fa-paper-plane  "></i>
+                <th:block th:text="#{btnEnviar}"></th:block>
+            </button>
         </form>
     </div>
 </div>

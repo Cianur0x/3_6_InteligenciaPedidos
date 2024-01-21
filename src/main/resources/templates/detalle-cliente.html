@@ -9,6 +9,8 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.1/css/all.css"
+          integrity="sha384-O8whS3fhG2OnA5Kas0Y9l3cfpmYjapjI0E4theH4iuMD+pLhbf6JI0jIMfYcK3yZ" crossorigin="anonymous">
 </head>
 <body>
 <div class="d-flex justify-content-center align-items-center">
@@ -26,9 +28,9 @@
             </ul>
 
         </div>
-        <form action="/clientes">
-            <input class="btn btn-info m-2" type="submit" value="Volver"/>
-        </form>
+        <a href="/clientes" class="btn btn-info m-2"> <i class="fas fa-arrow-left  "></i>
+            <th:block th:text="#{btnVolver}"></th:block>
+        </a>
     </div>
 </div>
 <!-- Optional JavaScript -->
