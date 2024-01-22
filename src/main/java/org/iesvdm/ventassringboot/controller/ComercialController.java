@@ -14,6 +14,7 @@ import org.springframework.web.servlet.view.RedirectView;
 
 import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Controller
 // @RequestMapping("/comerciales")
@@ -42,8 +43,15 @@ public class ComercialController {
         Comercial comercial = comercialService.one(id);
         model.addAttribute("comercial", comercial);
 
+        // metodo en service de comercial
         List<Pedido> pedidos = comercialService.pedidosFromComercial(id);
-        var ordenPedidos = pedidos.stream().sorted(Comparator.comparing(Pedido::getTotal));
+
+        // TODO ordenar segun el TOTAL de todos los pedidos de un cliente
+        // listado de clientes ordenados por cuantía de pedido de mayor a menor. El listado iría a continuación del listado de pedidos
+        List<Pedido> ordenPedidosClientes = pedidos.stream().sorted(Comparator.comparing(Pedido::getIdCliente)).collect(Collectors.toList());
+        model.addAttribute("ordenClientes", ordenPedidosClientes);
+
+        List<Pedido> ordenPedidos = pedidos.stream().sorted(Comparator.comparing(Pedido::getTotal)).collect(Collectors.toList());
         model.addAttribute("pedidosLista", ordenPedidos);
 
         var sum = pedidos.stream().mapToDouble(Pedido::getTotal).sum();
@@ -52,6 +60,9 @@ public class ComercialController {
         var media = pedidos.stream().mapToDouble(Pedido::getTotal).sum() / pedidos.size();
         model.addAttribute("media", media);
 
+
+
+        // get pedido by ID
         return "detalle-comercial";
     }
 
