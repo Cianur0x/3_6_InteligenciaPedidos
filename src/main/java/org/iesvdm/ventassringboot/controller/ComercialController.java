@@ -14,6 +14,7 @@ import org.springframework.web.servlet.view.RedirectView;
 
 import java.util.Comparator;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @Controller
@@ -49,9 +50,14 @@ public class ComercialController {
         // TODO ordenar segun el TOTAL de todos los pedidos de un cliente
         // listado de clientes ordenados por cuantía de pedido de mayor a menor. El listado iría a continuación del listado de pedidos
         // Lista de clientes con el total de pedidos
-        var idCLiente = pedidos.stream()
+        Map<Integer, Double> idCLiente = pedidos.stream()
                 .collect(Collectors.groupingBy(Pedido::getIdCliente, Collectors.summingDouble(Pedido::getTotal)));
-        model.addAttribute("totalesCliente", idCLiente);
+
+        // Ordenar el mapa por valores (totales) de mayor a menor
+        List<Map.Entry<Integer, Double>> sortedTotales = idCLiente.entrySet().stream()
+                .sorted(Map.Entry.<Integer, Double>comparingByValue().reversed())
+                .toList();
+        model.addAttribute("totalesCliente", sortedTotales);
 
         List<Pedido> ordenPedidos = pedidos.stream().sorted(Comparator.comparing(Pedido::getTotal)).collect(Collectors.toList());
         model.addAttribute("pedidosLista", ordenPedidos);
