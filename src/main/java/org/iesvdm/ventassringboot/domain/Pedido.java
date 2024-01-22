@@ -3,7 +3,6 @@ package org.iesvdm.ventassringboot.domain;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.cglib.core.Local;
 
 import java.time.LocalDate;
 
@@ -23,6 +22,16 @@ public class Pedido {
         this.id = id;
         this.total = total;
         this.fecha = fecha;
+        this.idCliente = idCliente;
+        this.idComercial = idComercial;
+    }
+
+    public Pedido(int id, Double total, LocalDate fecha, Cliente cliente, Comercial comercial, int idCliente, int idComercial) {
+        this.id = id;
+        this.total = total;
+        this.fecha = fecha;
+        this.cliente = cliente;
+        this.comercial = comercial;
         this.idCliente = idCliente;
         this.idComercial = idComercial;
     }

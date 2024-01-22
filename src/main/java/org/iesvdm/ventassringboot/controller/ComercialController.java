@@ -48,8 +48,10 @@ public class ComercialController {
 
         // TODO ordenar segun el TOTAL de todos los pedidos de un cliente
         // listado de clientes ordenados por cuantía de pedido de mayor a menor. El listado iría a continuación del listado de pedidos
-        List<Pedido> ordenPedidosClientes = pedidos.stream().sorted(Comparator.comparing(Pedido::getIdCliente)).collect(Collectors.toList());
-        model.addAttribute("ordenClientes", ordenPedidosClientes);
+        // Lista de clientes con el total de pedidos
+        var idCLiente = pedidos.stream()
+                .collect(Collectors.groupingBy(Pedido::getIdCliente, Collectors.summingDouble(Pedido::getTotal)));
+        model.addAttribute("totalesCliente", idCLiente);
 
         List<Pedido> ordenPedidos = pedidos.stream().sorted(Comparator.comparing(Pedido::getTotal)).collect(Collectors.toList());
         model.addAttribute("pedidosLista", ordenPedidos);
@@ -59,7 +61,6 @@ public class ComercialController {
 
         var media = pedidos.stream().mapToDouble(Pedido::getTotal).sum() / pedidos.size();
         model.addAttribute("media", media);
-
 
 
         // get pedido by ID

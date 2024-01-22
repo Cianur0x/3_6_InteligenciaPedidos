@@ -82,24 +82,16 @@
         <table class="table table-striped">
             <thead>
             <tr>
-                <th scope="col" th:text="#{pediCom}">ID Comercial</th>
-                <th scope="col" th:text="#{idPedido}">ID Pedido</th>
-                <th scope="col" th:text="#{totalPed}">Total</th>
-                <th scope="col" th:text="#{fechaPed}">Fecha</th>
                 <th scope="col" th:text="#{pediCli}">ID Cliente</th>
-                <th scope="col" th:text="#{pediCliNom}">Nombre Cliente</th>
+                <th scope="col" th:text="#{totalPed}">Total</th>
             </tr>
             </thead>
             <tbody>
-            <tr th:each="pedidoCli : ${ordenClientes}">
-                <th scope="row" th:text="${pedidoCli.comercial.id}">Autor</th>
-                <td th:text="${pedidoCli.id}">Título</td>
-                <td th:text="${pedidoCli.total}">Título</td>
-                <td th:text="${pedidoCli.fecha}">Autor</td>
-                <td th:text="${pedidoCli.cliente.id}">Título</td>
-                <td>
-                    <a th:href="@{/clientes/__${pedidoCli.cliente.id}__}" th:text="${pedidoCli.cliente.nombre}"></a>
-                </td>
+            <!-- TODO saber como meter una condicional para cada caso -->
+            <tr th:each="pedidos : ${totalesCliente}">
+                <th scope="row" th:text="${pedidos.key}">a</th>
+                <td th:text="${pedidos.value}">a</td>
+
             </tr>
             </tbody>
         </table>
