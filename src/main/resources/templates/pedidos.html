@@ -1,7 +1,7 @@
 <!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
 <html xmlns:th="http://www.thymeleaf.org" lang="es">
 <head>
-    <title th:text="#{pedido}">Comerciales</title>
+    <title th:text="#{pedido}">Pedidos</title>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -18,15 +18,28 @@
 
 <div class="d-flex justify-content-center">
     <div class="w-75">
+        <!-- Cabecera de tabla -->
         <div class="row d-flex justify-content-center align-items-center">
             <h1 class="text-center" th:text="#{pedido}"></h1>
+            <div class="col-md-4 align-self-center">
+                <!-- Botones para cambiar de idioma -->
+                <button class="btn btn-primary" th:text="#{lang.espaniol}"
+                        onclick="window.location.href='http://localhost:8080/pedidos?lang=es'">
+                </button>
+                <button class="btn btn-danger" th:text="#{lang.ingles}"
+                        onclick="window.location.href='http://localhost:8080/pedidos?lang=en'">
+                </button>
+            </div>
+            <!-- FORM CREAR -->
             <form th:action="@{/comerciales/crear}" class="p-3">
                 <input type="hidden" name="id"/>
                 <button type="submit" class="btn btn-primary"><i class="fas fa-plus-square"></i> &ensp;
-                <th:block th:text="#{btnCrear}"></th:block>
+                    <th:block th:text="#{btnCrear}"></th:block>
                 </button>
             </form>
         </div>
+
+        <!-- Cuerpo de la tabla -->
         <table class="table table-striped">
             <thead>
             <tr>
@@ -48,51 +61,51 @@
                 <td th:text="${pedido.idCliente}">Título</td>
                 <td th:text="${pedido.idComercial}">Autor</td>
 
-<!--                <td>-->
-<!--                    <form method="get" th:action="@{/pedidos/editar/__${pedido.id}__}">-->
-<!--                        <input type="hidden" name="id"/>-->
-<!--                        <button type="submit" class="btn btn-secondary"><i class="fas fa-pen"></i>&ensp;Editar</button>-->
-<!--                    </form>-->
-<!--                </td>-->
-<!--                <td>-->
-<!--                    <form method="get" th:action="@{/pedidos/__${pedido.id}__}">-->
-<!--                        <input type="hidden" name="id"/>-->
-<!--                        <button type="submit" class="btn btn-info"><i class="fas fa-info"></i>&ensp;Ver Detalles-->
-<!--                        </button>-->
-<!--                    </form>-->
-<!--                </td>-->
-<!--                <td>-->
-<!--                    <form th:method="post" th:action="@{/pedidos/borrar/__${pedido.id}__}">-->
-<!--                        <button type="button" class="btn btn-danger" data-toggle="modal"-->
-<!--                                th:data-target="'#modal' + ${pedido.id}"><i class="fas fa-trash"></i>&ensp;Borrar-->
-<!--                        </button>-->
-<!--                        &lt;!&ndash; Modal &ndash;&gt;-->
-<!--                        <div class="modal fade" th:id="'modal' + ${pedido.id}" tabindex="-1" role="dialog"-->
-<!--                             aria-labelledby="exampleModalCenterTitle" aria-hidden="true">-->
-<!--                            <div class="modal-dialog modal-dialog-centered" role="document">-->
-<!--                                <div class="modal-content">-->
-<!--                                    <div class="modal-header">-->
-<!--                                        <h5 class="modal-title" id="exampleModalLongTitle">¿Está seguro de que quiere-->
-<!--                                            borrar este comercial?</h5>-->
-<!--                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">-->
-<!--                                            <span aria-hidden="true">&times;</span>-->
-<!--                                        </button>-->
-<!--                                    </div>-->
+                <!--                <td>-->
+                <!--                    <form method="get" th:action="@{/pedidos/editar/__${pedido.id}__}">-->
+                <!--                        <input type="hidden" name="id"/>-->
+                <!--                        <button type="submit" class="btn btn-secondary"><i class="fas fa-pen"></i>&ensp;Editar</button>-->
+                <!--                    </form>-->
+                <!--                </td>-->
+                <!--                <td>-->
+                <!--                    <form method="get" th:action="@{/pedidos/__${pedido.id}__}">-->
+                <!--                        <input type="hidden" name="id"/>-->
+                <!--                        <button type="submit" class="btn btn-info"><i class="fas fa-info"></i>&ensp;Ver Detalles-->
+                <!--                        </button>-->
+                <!--                    </form>-->
+                <!--                </td>-->
+                <!--                <td>-->
+                <!--                    <form th:method="post" th:action="@{/pedidos/borrar/__${pedido.id}__}">-->
+                <!--                        <button type="button" class="btn btn-danger" data-toggle="modal"-->
+                <!--                                th:data-target="'#modal' + ${pedido.id}"><i class="fas fa-trash"></i>&ensp;Borrar-->
+                <!--                        </button>-->
+                <!--                        &lt;!&ndash; Modal &ndash;&gt;-->
+                <!--                        <div class="modal fade" th:id="'modal' + ${pedido.id}" tabindex="-1" role="dialog"-->
+                <!--                             aria-labelledby="exampleModalCenterTitle" aria-hidden="true">-->
+                <!--                            <div class="modal-dialog modal-dialog-centered" role="document">-->
+                <!--                                <div class="modal-content">-->
+                <!--                                    <div class="modal-header">-->
+                <!--                                        <h5 class="modal-title" id="exampleModalLongTitle">¿Está seguro de que quiere-->
+                <!--                                            borrar este comercial?</h5>-->
+                <!--                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">-->
+                <!--                                            <span aria-hidden="true">&times;</span>-->
+                <!--                                        </button>-->
+                <!--                                    </div>-->
 
-<!--                                    <div class="modal-body" th:text="'Cliente con ID: '+ ${comercial.id}">-->
+                <!--                                    <div class="modal-body" th:text="'Cliente con ID: '+ ${comercial.id}">-->
 
-<!--                                    </div>-->
-<!--                                    <div class="modal-footer">-->
-<!--                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">-->
-<!--                                            No, cancelar.-->
-<!--                                        </button>-->
-<!--                                        <button type="submit" class="btn btn-primary">Sí, continuar.</button>-->
-<!--                                    </div>-->
-<!--                                </div>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                    </form>-->
-<!--                </td>-->
+                <!--                                    </div>-->
+                <!--                                    <div class="modal-footer">-->
+                <!--                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">-->
+                <!--                                            No, cancelar.-->
+                <!--                                        </button>-->
+                <!--                                        <button type="submit" class="btn btn-primary">Sí, continuar.</button>-->
+                <!--                                    </div>-->
+                <!--                                </div>-->
+                <!--                            </div>-->
+                <!--                        </div>-->
+                <!--                    </form>-->
+                <!--                </td>-->
             </tr>
             </tbody>
         </table>

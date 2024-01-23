@@ -1,7 +1,7 @@
 <!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
 <html xmlns:th="http://www.thymeleaf.org" lang="es">
 <head>
-    <title>Clientes</title>
+    <title th:text="#{clientes}">Clientes</title>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -9,7 +9,6 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.1/css/all.css"
           integrity="sha384-O8whS3fhG2OnA5Kas0Y9l3cfpmYjapjI0E4theH4iuMD+pLhbf6JI0jIMfYcK3yZ"
           crossorigin="anonymous">
@@ -18,8 +17,19 @@
 
 <div class="d-flex justify-content-center">
     <div class="w-75">
+        <!-- Cabecera de tabla -->
         <div class="row d-flex justify-content-center align-items-center">
             <h1 class="text-center" th:text="#{clientes}"></h1>
+            <div class="col-md-4 align-self-center">
+                <!-- Botones para cambiar de idioma -->
+                <button class="btn btn-primary" th:text="#{lang.espaniol}"
+                        onclick="window.location.href='http://localhost:8080/clientes?lang=es'">
+                </button>
+                <button class="btn btn-danger" th:text="#{lang.ingles}"
+                        onclick="window.location.href='http://localhost:8080/clientes?lang=en'">
+                </button>
+            </div>
+            <!-- FORMULARIO CREAR -->
             <form th:action="@{/clientes/crear}" class="p-3">
                 <input type="hidden" name="id"/>
                 <button type="submit" class="btn btn-primary"><i class="fas fa-plus-square"></i> &ensp;
@@ -51,6 +61,7 @@
                 <td th:text="${cliente.categoria}">cat</td>
 
                 <td>
+                    <!-- FORMULARIO EDITAR -->
                     <form method="get" th:action="@{/clientes/editar/__${cliente.id}__}">
                         <input type="hidden" name="id"/>
                         <button type="submit" class="btn btn-secondary"><i class="fas fa-pen"></i>&ensp;
@@ -59,6 +70,7 @@
                     </form>
                 </td>
                 <td>
+                    <!-- FORMULARIO DETALLE -->
                     <form method="get" th:action="@{/clientes/__${cliente.id}__}">
                         <input type="hidden" name="id"/>
                         <button type="submit" class="btn btn-info">
@@ -68,12 +80,13 @@
                     </form>
                 </td>
                 <td>
+                    <!-- FORMULARIO BORRAR -->
                     <form th:method="post" th:action="@{/clientes/borrar/__${cliente.id}__}">
                         <button type="button" class="btn btn-danger" data-toggle="modal"
                                 th:data-target="'#modal' + ${cliente.id}"><i class="fas fa-trash"></i>&ensp;
                             <th:block th:text="#{btnBorrar}"></th:block>
                         </button>
-                        <!-- Modal -->
+                        <!-- MODAL PARA BORRADO DE CLIENTE -->
                         <div class="modal fade" th:id="'modal' + ${cliente.id}" tabindex="-1" role="dialog"
                              aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                             <div class="modal-dialog modal-dialog-centered" role="document">

@@ -1,7 +1,7 @@
 <!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
 <html xmlns:th="http://www.thymeleaf.org" lang="es">
 <head>
-    <title>Comerciales</title>
+    <title th:text="#{comercial}">Comerciales</title>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -18,8 +18,19 @@
 
 <div class="d-flex justify-content-center">
     <div class="w-75">
+        <!-- Cabecera de tabla -->
         <div class="row d-flex justify-content-center align-items-center">
             <h1 class="text-center" th:text="#{comercial}">Comerciales</h1>
+            <div class="col-md-4 align-self-center">
+                <!-- Botones para cambiar de idioma -->
+                <button class="btn btn-primary" th:text="#{lang.espaniol}"
+                        onclick="window.location.href='http://localhost:8080/comerciales?lang=es'">
+                </button>
+                <button class="btn btn-danger" th:text="#{lang.ingles}"
+                        onclick="window.location.href='http://localhost:8080/comerciales?lang=en'">
+                </button>
+            </div>
+            <!-- FORMULARIO CREAR -->
             <form th:action="@{/comerciales/crear}" class="p-3">
                 <input type="hidden" name="id"/>
                 <button type="submit" class="btn btn-primary"><i class="fas fa-plus-square"></i>&ensp;
@@ -47,7 +58,7 @@
                 <td th:text="${comercial.apellido1}">Autor</td>
                 <td th:text="${comercial.apellido2}">Título</td>
                 <td th:text="${comercial.comision}">Autor</td>
-
+                <!-- FORMULARIO EDITAR -->
                 <td>
                     <form method="get" th:action="@{/comerciales/editar/__${comercial.id}__}">
                         <input type="hidden" name="id"/>
@@ -56,6 +67,7 @@
                         </button>
                     </form>
                 </td>
+                <!-- FORMULARIO DETALLE -->
                 <td>
                     <form method="get" th:action="@{/comerciales/__${comercial.id}__}">
                         <input type="hidden" name="id"/>
@@ -65,12 +77,13 @@
                     </form>
                 </td>
                 <td>
+                    <!-- FORMULARIO BORRAR -->
                     <form th:method="post" th:action="@{/comerciales/borrar/__${comercial.id}__}">
                         <button type="button" class="btn btn-danger" data-toggle="modal"
                                 th:data-target="'#modal' + ${comercial.id}"><i class="fas fa-trash"></i>&ensp;
                             <th:block th:text="#{btnBorrar}"></th:block>
                         </button>
-                        <!-- Modal -->
+                        <!-- MODAL PARA BORRADO DE COMERCIAL -->
                         <div class="modal fade" th:id="'modal' + ${comercial.id}" tabindex="-1" role="dialog"
                              aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                             <div class="modal-dialog modal-dialog-centered" role="document">

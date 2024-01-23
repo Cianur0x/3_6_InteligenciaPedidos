@@ -1,6 +1,5 @@
 package org.iesvdm.ventassringboot.controller;
 
-import org.iesvdm.ventassringboot.domain.Comercial;
 import org.iesvdm.ventassringboot.domain.Pedido;
 import org.iesvdm.ventassringboot.service.PedidoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +14,12 @@ public class PedidoController {
     @Autowired
     private PedidoService pedidoService;
 
+    /**
+     * Maneja las solicitudes GET para mostrar la lista de pedidos.
+     *
+     * @param model El modelo que se utilizará para pasar datos a la vista.
+     * @return El nombre de la vista "pedidos" que mostrará la lista de pedidos.
+     */
     @GetMapping({"/pedidos", "/orders"})
     public String listar(Model model) {
 

@@ -11,24 +11,34 @@ import org.springframework.web.servlet.i18n.SessionLocaleResolver;
 
 import java.util.Locale;
 
-// esto es para la configuración de idioma, español o ingles
+// Indica que esta clase es una clase de configuración de Spring
 @Configuration
+// Especifica el paquete base que Spring debe escanear en busca de componentes gestionados por Spring, como controladores, servicios y repositorios
 @ComponentScan(basePackages = "org.iesvdm.ventassringboot.config")
-public class MVCConfig implements WebMvcConfigurer {
+public class MVCConfig implements WebMvcConfigurer { // Esta clase configura aspectos específicos de Spring MVC
+
     @Bean
     public LocaleResolver localeResolver() {
         SessionLocaleResolver slr = new SessionLocaleResolver();
+
+        // Establecer el idioma predeterminado como español de España
         slr.setDefaultLocale(new Locale("es", "ES"));
         return slr;
     }
 
+    /**
+     * Este interceptor permite cambiar dinámicamente el idioma de la aplicación en función de un parámetro de solicitud específico
+     */
     @Bean
     public LocaleChangeInterceptor localeChangeInterceptor() {
         LocaleChangeInterceptor lci = new LocaleChangeInterceptor();
+
+        // Establecer el nombre del parámetro que se utilizará para cambiar el idioma
         lci.setParamName("lang");
         return lci;
     }
 
+    // Añadir el interceptor al registro de interceptores
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(localeChangeInterceptor());
