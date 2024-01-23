@@ -51,6 +51,10 @@ public class ComercialService {
         return pedidos.stream().mapToDouble(Pedido::getTotal).sum();
     }
 
+    /**
+     * TODO Añade las estadísticas de total y media de pedidos del comercial en su detalle.
+     *  Utiliza un DTO para transferir a la vista las estadísticas de inteligencia de pedidos
+     */
     public BigDecimal mediaPedidosComercial(List<Pedido> pedidos) {
         double media = totalPedidosComercial(pedidos) / pedidos.size();
         BigDecimal bd = BigDecimal.valueOf(media);
