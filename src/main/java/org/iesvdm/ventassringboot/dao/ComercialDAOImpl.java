@@ -5,6 +5,7 @@ import org.iesvdm.ventassringboot.domain.Pedido;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 
@@ -37,7 +38,7 @@ public class ComercialDAOImpl implements ComercialDAO<Comercial> {
 
         List<Comercial> comercialList = jdbcTemplate.query(
                 "SELECT * FROM comercial",
-                (rs, rowNum) -> new Comercial(rs.getInt("id"), rs.getString("nombre"), rs.getString("apellido1"), rs.getString("apellido2"), rs.getDouble("comisión"))
+                (rs, rowNum) -> new Comercial(rs.getInt("id"), rs.getString("nombre"), rs.getString("apellido1"), rs.getString("apellido2"),  BigDecimal.valueOf(rs.getDouble("comisión")))
         );
 
         return comercialList;
@@ -52,7 +53,7 @@ public class ComercialDAOImpl implements ComercialDAO<Comercial> {
     public Optional<Comercial> find(int id) {
         Comercial cliente = jdbcTemplate
                 .queryForObject("SELECT * FROM comercial WHERE id = ?"
-                        , (rs, rowNum) -> new Comercial(rs.getInt("id"), rs.getString("nombre"), rs.getString("apellido1"), rs.getString("apellido2"), rs.getDouble("comisión"))
+                        , (rs, rowNum) -> new Comercial(rs.getInt("id"), rs.getString("nombre"), rs.getString("apellido1"), rs.getString("apellido2"), BigDecimal.valueOf(rs.getDouble("comisión")))
                         , id
                 );
 

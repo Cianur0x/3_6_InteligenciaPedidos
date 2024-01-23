@@ -6,6 +6,7 @@ import org.iesvdm.ventassringboot.domain.Pedido;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 
@@ -64,7 +65,7 @@ public class PedidoDAOImpl implements PedidoDAO<Pedido> {
                                 rs.getString("CO.nombre"),
                                 rs.getString("CO.apellido1"),
                                 rs.getString("CO.apellido2"),
-                                rs.getDouble("CO.comisión")
+                                BigDecimal.valueOf(rs.getDouble("CO.comisión"))
                         ), rs.getInt("C.id"), rs.getInt("CO.id")), id);
 
         return comercialPedList;

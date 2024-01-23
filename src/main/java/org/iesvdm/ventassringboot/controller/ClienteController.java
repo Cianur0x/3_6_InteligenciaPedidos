@@ -1,10 +1,12 @@
 package org.iesvdm.ventassringboot.controller;
 
+import jakarta.validation.Valid;
 import org.iesvdm.ventassringboot.domain.Cliente;
 import org.iesvdm.ventassringboot.service.ClienteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -73,11 +75,15 @@ public class ClienteController {
      * @return Una redirección a la lista de clientes después de la creación.
      */
     @PostMapping("/clientes/crear")
-    public RedirectView submitCrear(@ModelAttribute("cliente") Cliente cliente) {
+    public String submitCrear(@Valid @ModelAttribute("cliente") Cliente cliente, BindingResult bindingResulted, Model model) {
 
+        if (bindingResulted.hasErrors()) {
+            model.addAttribute("cliente", cliente);
+
+            return "crear-cliente";
+        }
         clienteService.create(cliente);
-
-        return new RedirectView("/clientes");
+        return "redirect:/clientes";
     }
 
     /**

@@ -47,8 +47,8 @@ public class ComercialService {
         comercialDAO.delete(id);
     }
 
-    public Double totalPedidosComercial(List<Pedido> pedidos) {
-        return pedidos.stream().mapToDouble(Pedido::getTotal).sum();
+    public BigDecimal totalPedidosComercial(List<Pedido> pedidos) {
+        return BigDecimal.valueOf(pedidos.stream().mapToDouble(Pedido::getTotal).sum());
     }
 
     /**
@@ -56,10 +56,8 @@ public class ComercialService {
      *  Utiliza un DTO para transferir a la vista las estadísticas de inteligencia de pedidos
      */
     public BigDecimal mediaPedidosComercial(List<Pedido> pedidos) {
-        double media = totalPedidosComercial(pedidos) / pedidos.size();
-        BigDecimal bd = BigDecimal.valueOf(media);
-        bd = bd.setScale(2, RoundingMode.HALF_UP);
-        return bd;
+        // bd = bd.setScale(2, RoundingMode.HALF_UP);
+        return totalPedidosComercial(pedidos).divide(BigDecimal.valueOf(pedidos.size()), 2, RoundingMode.HALF_UP);
     }
 
     public List<Pedido> pedidosSortedByTotal(List<Pedido> pedidos) {
