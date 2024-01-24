@@ -26,12 +26,40 @@
                 <li class="list-group-item" th:text="${cliente.apellido2}">ape2</li>
                 <li class="list-group-item" th:text="${cliente.ciudad}">city</li>
                 <li class="list-group-item" th:text="${cliente.categoria}">cat</li>
+                <li class="list-group-item" th:text="${cliente.pedidosTrimestre} + ' pedidos Trimestre'">cat</li>
+                <li class="list-group-item" th:text="${cliente.pedidosSemestre} + ' pedidos Semestre'">cat</li>
+                <li class="list-group-item" th:text="${cliente.pedidosAnio} + ' pedidos Anio'">cat</li>
+                <li class="list-group-item" th:text="${cliente.pedidosLustro} + ' pedidos Lustro'">cat</li>
+
             </ul>
 
         </div>
         <a href="/clientes" class="btn btn-info m-2"> <i class="fas fa-arrow-left  "></i>
             <th:block th:text="#{btnVolver}"></th:block>
         </a>
+    </div>
+</div>
+
+<div class="d-flex justify-content-center">
+    <div class="w-25">
+        <div class="row d-flex justify-content-center align-items-center">
+            <h1 class="text-center" th:text="#{comercial}">Comerciales Asociados</h1>
+        </div>
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th scope="col">ID Comercial</th>
+                <th scope="col">Conteo</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="comercial : ${cliente.comercialesAsociados}">
+                <th scope="row" th:text="${comercial.key}">a</th>
+                <td th:text="${comercial.value}">a</td>
+
+            </tr>
+            </tbody>
+        </table>
     </div>
 </div>
 <!-- Optional JavaScript -->

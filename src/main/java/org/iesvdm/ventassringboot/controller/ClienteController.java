@@ -2,6 +2,8 @@ package org.iesvdm.ventassringboot.controller;
 
 import jakarta.validation.Valid;
 import org.iesvdm.ventassringboot.domain.Cliente;
+import org.iesvdm.ventassringboot.dto.ClienteDTO;
+import org.iesvdm.ventassringboot.mapper.ClienteMapper;
 import org.iesvdm.ventassringboot.service.ClienteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.view.RedirectView;
 
 import java.util.List;
+import java.util.Map;
 
 @Controller
 // @RequestMapping("/clientes")
@@ -21,6 +24,9 @@ public class ClienteController {
     // Field injection is not recommended cuando usamos el @Autowired
     @Autowired
     private ClienteService clienteService;
+
+    @Autowired
+    private ClienteMapper clienteMapper;
 
     /**
      * Maneja las solicitudes GET para mostrar la lista de clientes.
@@ -48,8 +54,16 @@ public class ClienteController {
     public String detalle(Model model, @PathVariable Integer id) {
 
         Cliente cliente = clienteService.one(id);
-        model.addAttribute("cliente", cliente);
 
+        Map<Integer, Long> lista = clienteService.comercialesAsociados(id);
+        long pedidosTrimestre = clienteService.pedidosTrimestre(id);
+        long pedidosSemestre = clienteService.pedidosSemestre(id);
+        long pedidosAnio = clienteService.pedidosAnio(id);
+        long pedidosLustro = clienteService.pedidosLustro(id);
+
+        ClienteDTO clienteDTO = clienteMapper.clienteAClienteDTO(cliente, lista, pedidosTrimestre, pedidosSemestre, pedidosAnio, pedidosLustro);
+
+        model.addAttribute("cliente", clienteDTO);
         return "detalle-cliente";
     }
 

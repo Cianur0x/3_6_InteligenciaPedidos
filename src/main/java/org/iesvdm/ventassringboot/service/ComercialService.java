@@ -19,6 +19,7 @@ import java.util.stream.Collectors;
 public class ComercialService {
     @Autowired
     private ComercialDAO<Comercial> comercialDAO;
+
     @Autowired
     private PedidoDAO<Pedido> pedidoDAO;
 
