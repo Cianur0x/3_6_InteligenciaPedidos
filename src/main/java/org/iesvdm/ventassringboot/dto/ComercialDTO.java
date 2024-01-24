@@ -11,7 +11,7 @@ import java.util.Map;
 @Data
 @AllArgsConstructor
 public class ComercialDTO {
-
+    // TODO preguntar como sabe que tiene que recoger los datos de comercial y adueñarse de ellos
     private int id;
     private String nombre;
     private String apellido1;
