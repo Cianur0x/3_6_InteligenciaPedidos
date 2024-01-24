@@ -8,24 +8,29 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <link rel="stylesheet" href="/css/error.css"/>
 </head>
 <body class="d-flex flex-column justify-content-center align-items-center">
 <div class="text-center cover-container w-25">
     <main role="main" class="inner cover">
-        <h1 class="cover-heading" th:text="#{saludo}"></h1>
+
         <!-- Botones para cambiar de idioma -->
-        <button class="btn btn-primary" th:text="#{lang.espaniol}"
-                onclick="window.location.href='http://localhost:8080/?lang=es'">
-        </button>
-        <button class="btn btn-danger" th:text="#{lang.ingles}"
-                onclick="window.location.href='http://localhost:8080/?lang=en'">
-        </button>
-        <nav class="nav nav-masthead justify-content-center">
-            <a class="nav-link active" href="http://localhost:8080/clientes" th:text="#{clientes}">Clientes</a>
-            <a class="nav-link" href="http://localhost:8080/comerciales" th:text="#{comercial}">Comercial</a>
-            <a class="nav-link" href="http://localhost:8080/pedidos" th:text="#{pedido}">Pedido</a>
-        </nav>
+        <section class="page-not-found">
+            <h1 class="cover-heading" th:text="#{saludo}"></h1>
+            <img src="/img/cat.jpg" alt=""/>
+            <button class="btn btn-primary" th:text="#{lang.espaniol}"
+                    onclick="window.location.href='http://localhost:8080/?lang=es'">
+            </button>
+            <button class="btn btn-danger" th:text="#{lang.ingles}"
+                    onclick="window.location.href='http://localhost:8080/?lang=en'">
+            </button>
+            <nav class="nav nav-masthead justify-content-center">
+                <a class="nav-link active" th:href="@{/clientes}" th:text="#{clientes}">Clientes</a>
+                <a class="nav-link" th:href="@{/comerciales}" th:text="#{comercial}">Comercial</a>
+                <a class="nav-link" th:href="@{/pedidos}" th:text="#{pedido}">Pedido</a>
+            </nav>
+        </section>
+
     </main>
 </div>
 

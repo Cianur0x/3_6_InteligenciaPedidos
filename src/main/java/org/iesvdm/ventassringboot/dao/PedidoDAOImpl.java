@@ -59,7 +59,8 @@ public class PedidoDAOImpl implements PedidoDAO<Pedido> {
                                 rs.getString("C.apellido1"),
                                 rs.getString("C.apellido2"),
                                 rs.getString("C.ciudad"),
-                                rs.getInt("C.categoría")
+                                rs.getInt("C.categoría"),
+                                rs.getString("C.ciudad")
                         ),
                         new Comercial(rs.getInt("CO.id"),
                                 rs.getString("CO.nombre"),

@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.1/css/all.css"
           integrity="sha384-O8whS3fhG2OnA5Kas0Y9l3cfpmYjapjI0E4theH4iuMD+pLhbf6JI0jIMfYcK3yZ"
           crossorigin="anonymous">
+    <link rel="stylesheet" href="/css/error.css"/>
 </head>
 <body>
 
@@ -46,6 +47,7 @@
                 <th scope="col" th:text="#{apell2}">Apellido2</th>
                 <th scope="col" th:text="#{clienteCiudad}">Cuidad</th>
                 <th scope="col" th:text="#{clienteCat}">Categoría</th>
+                <th scope="col" th:text="#{email}">Email</th>
                 <th></th>
                 <th></th>
                 <th></th>
@@ -59,6 +61,7 @@
                 <td th:text="${cliente.apellido2}">ape2</td>
                 <td th:text="${cliente.ciudad}">ciudad</td>
                 <td th:text="${cliente.categoria}">cat</td>
+                <td th:text="${cliente.email}">cat</td>
 
                 <td>
                     <!-- FORMULARIO EDITAR -->

@@ -25,6 +25,7 @@ public class Comercial {
     private String apellido2;
 
     // poner  inclusive=true es reduntante, por defecto true
+    @NotNull(message = "Por favor, introduzca una comisión")
     @DecimalMax(value = "0.946", message = "El valor tiene que ser menor que {value}")
     @DecimalMin(value = "0.276", message = "El valor tiene que ser mayor a {value}")
     private BigDecimal comision;

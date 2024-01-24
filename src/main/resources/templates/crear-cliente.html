@@ -11,6 +11,7 @@
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.1/css/all.css"
           integrity="sha384-O8whS3fhG2OnA5Kas0Y9l3cfpmYjapjI0E4theH4iuMD+pLhbf6JI0jIMfYcK3yZ" crossorigin="anonymous">
+    <link rel="stylesheet" href="/css/error.css"/>
 </head>
 <body>
 <div class=" d-flex justify-content-center">
@@ -45,13 +46,19 @@
             <div class="form-group">
                 <label for="cat" th:text="#{clienteCat}">Categoría</label>
                 <input type="text" class="form-control" id="cat" th:placeholder="#{clienteCat}" th:field="*{categoria}">
-                <p th:if="${#fields.hasErrors('categoria')}" th:errors="*{categoria}">Incorrect date</p>
                 <ul class="text-danger" th:if="${#fields.hasErrors('categoria')}">
                     <li th:each="err : ${#fields.errors('categoria')}" th:text="${err}"/>
                 </ul>
             </div>
+            <div class="form-group">
+                <label for="email" th:text="#{email}">Email</label>
+                <input type="email" class="form-control" id="email" th:placeholder="#{email}" th:field="*{email}">
+                <ul class="text-danger" th:if="${#fields.hasErrors('email')}">
+                    <li th:each="err : ${#fields.errors('email')}" th:text="${err}"/>
+                </ul>
+            </div>
 
-            <a href="/clientes" class="btn btn-info"> <i class="fas fa-arrow-left  "></i>
+            <a th:href="@{/clientes}" class="btn btn-info"> <i class="fas fa-arrow-left  "></i>
                 <th:block th:text="#{btnVolver}"></th:block>
             </a>
             <button type="submit" class="btn btn-primary"><i class="fas fa-paper-plane  "></i>

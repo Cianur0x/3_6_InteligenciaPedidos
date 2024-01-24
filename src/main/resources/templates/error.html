@@ -1,0 +1,26 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<head>
+    <meta charset="UTF-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link rel="stylesheet" href="/css/error.css"/>
+    <title>Error</title>
+</head>
+<body>
+<!-- Main Content Start -->
+<section class="page-not-found">
+    <img src="/img/404 Monster .svg" alt=""/>
+    <h1>Page Not Found</h1>
+    <p>
+        Sorry can't find the page you are looking for!
+        <a th:href="@{/}">Click Here</a> to come back to home page
+    </p>
+    <form th:action="@{/}">
+        <button type="submit" class="btn-home">Back To Home</button>
+    </form>
+
+</section>
+<!-- Main Content End -->
+</body>
+</html>

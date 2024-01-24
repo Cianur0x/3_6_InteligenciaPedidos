@@ -1,11 +1,14 @@
 package org.iesvdm.ventassringboot.controller;
 
+import jakarta.validation.Valid;
 import org.iesvdm.ventassringboot.domain.Comercial;
 import org.iesvdm.ventassringboot.domain.Pedido;
 import org.iesvdm.ventassringboot.service.ComercialService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -60,6 +63,8 @@ public class ComercialController {
         model.addAttribute("comercial", comercial);
 
         // Métodos en Service de comercial para procesar información sobre los pedidos
+        // etsos campos deberianpertenecer a un dto asi solo tendriamos un addAtribute y seria de
+        // COMERCIALDTO
         List<Pedido> pedidos = comercialService.pedidosFromComercial(id);
 
         var sortedTotales = comercialService.totalClienteSorted(pedidos);
@@ -100,11 +105,17 @@ public class ComercialController {
      * @return Una redirección a la lista de comerciales después de la creación.
      */
     @PostMapping("/comerciales/crear")
-    public RedirectView submitCrear(@ModelAttribute("comercial") Comercial comercial) {
+    public String submitCrear(@Valid @ModelAttribute("comercial") Comercial comercial, BindingResult bindingResult, Model model) {
+
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("comercial", comercial);
+
+            return "crear-comercial";
+        }
 
         comercialService.newComercial(comercial);
 
-        return new RedirectView("/comerciales");
+        return "redirect:/comerciales";
     }
 
     /**

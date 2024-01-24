@@ -19,29 +19,47 @@
             <div class="form-group">
                 <label for="id">ID</label>
                 <input type="text" class="form-control" id="id" th:field="*{id}" placeholder="ID" readonly>
+                <ul class="text-danger" th:if="${#fields.hasErrors('id')}">
+                    <li th:each="err : ${#fields.errors('id')}" th:text="${err}"/>
+                </ul>
             </div>
             <div class="form-group">
                 <label for="nombre" th:text="#{nombre}"></label>
                 <input type="text" class="form-control" id="nombre" th:field="*{nombre}" placeholder="Nombre">
+                <ul class="text-danger" th:if="${#fields.hasErrors('nombre')}">
+                    <li th:each="err : ${#fields.errors('nombre')}" th:text="${err}"/>
+                </ul>
             </div>
             <div class="form-group">
                 <label for="ape1" th:text="#{apell1}"></label>
                 <input type="text" class="form-control" id="ape1" th:field="*{apellido1}" placeholder="Primer Apellido">
+                <ul class="text-danger" th:if="${#fields.hasErrors('apellido1')}">
+                    <li th:each="err : ${#fields.errors('apellido1')}" th:text="${err}"/>
+                </ul>
             </div>
             <div class="form-group">
                 <label for="ape2" th:text="#{apell2}"></label>
                 <input type="text" class="form-control" id="ape2" placeholder="Segundo Apellido"
                        th:field="*{apellido2}">
+                <ul class="text-danger" th:if="${#fields.hasErrors('apellido2')}">
+                    <li th:each="err : ${#fields.errors('apellido2')}" th:text="${err}"/>
+                </ul>
             </div>
             <div class="form-group">
                 <label for="ciudad" th:text="#{clienteCiudad}"></label>
                 <input type="text" class="form-control" id="ciudad" placeholder="Ciudad" th:field="*{ciudad}">
+                <ul class="text-danger" th:if="${#fields.hasErrors('ciudad')}">
+                    <li th:each="err : ${#fields.errors('ciudad')}" th:text="${err}"/>
+                </ul>
             </div>
             <div class="form-group">
                 <label for="cat" th:text="#{clienteCat}">Categoría</label>
                 <input type="text" class="form-control" id="cat" placeholder="Categoría" th:field="*{categoria}">
+                <ul class="text-danger" th:if="${#fields.hasErrors('categoria')}">
+                    <li th:each="err : ${#fields.errors('categoria')}" th:text="${err}"/>
+                </ul>
             </div>
-            <a href="/clientes" class="btn btn-info"> <i class="fas fa-arrow-left  "></i>
+            <a th:href="@{/clientes}" class="btn btn-info"> <i class="fas fa-arrow-left  "></i>
                 <th:block th:text="#{btnVolver}"></th:block>
             </a>
             <button type="submit" class="btn btn-primary"><i class="fas fa-paper-plane  "></i>

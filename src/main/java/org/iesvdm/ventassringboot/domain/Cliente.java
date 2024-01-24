@@ -12,7 +12,7 @@ public class Cliente {
     @NotNull
     private int id;
 
-    @NotBlank(message = "Por favor, introduzca un nombre.")
+    @NotBlank(message = "{nombre.error.blank}")
     @Size(max = 30, message = "Nombre como máximo de 30 caracteres.")
     private String nombre;
 
@@ -30,4 +30,7 @@ public class Cliente {
     @Min(value = 100, message = "La categoría debe ser mayor a 100")
     @Max(value = 1000, message = "La categoría deber ser menor que 1000")
     private int categoria;
+
+    @Email(message = "{error.email.cli} '${validatedValue}'", regexp="^[a-zA-Z0-9._-]+@[a-zA-Z0-9-]+\\.[a-zA-Z.]{2,5}")
+    private String email;
 }

@@ -1,10 +1,10 @@
 package org.iesvdm.ventassringboot.dto;
 
-public class ClienteDTO {
+public class ClienteFormDTO {
     private int idCliente;
     private double totalPedidos;
 
-    public ClienteDTO(int idCliente, double totalPedidos) {
+    public ClienteFormDTO(int idCliente, double totalPedidos) {
         this.idCliente = idCliente;
         this.totalPedidos = totalPedidos;
     }

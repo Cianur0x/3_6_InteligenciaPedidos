@@ -29,7 +29,7 @@ public class ClienteDAOImpl implements ClienteDAO<Cliente> {
      */
     @Override
     public void create(Cliente cliente) {
-        jdbcTemplate.update("INSERT INTO cliente (nombre , apellido1 , apellido2, ciudad, categoría) VALUES (?, ?, ?, ?, ?)", cliente.getNombre(), cliente.getApellido1(), cliente.getApellido2(), cliente.getCiudad(), cliente.getCategoria());
+        jdbcTemplate.update("INSERT INTO cliente (nombre , apellido1 , apellido2, ciudad, categoría, email) VALUES (?, ?, ?, ?, ?,?)", cliente.getNombre(), cliente.getApellido1(), cliente.getApellido2(), cliente.getCiudad(), cliente.getCategoria(),cliente.getEmail());
     }
 
     /**
@@ -43,7 +43,7 @@ public class ClienteDAOImpl implements ClienteDAO<Cliente> {
 
         List<Cliente> listaClientes = jdbcTemplate.query(
                 "SELECT * FROM cliente",
-                (rs, rowNum) -> new Cliente(rs.getInt("id"), rs.getString("nombre"), rs.getString("apellido1"), rs.getString("apellido2"), rs.getString("ciudad"), rs.getInt("categoría"))
+                (rs, rowNum) -> new Cliente(rs.getInt("id"), rs.getString("nombre"), rs.getString("apellido1"), rs.getString("apellido2"), rs.getString("ciudad"), rs.getInt("categoría"), rs.getString("email"))
         );
 
         return listaClientes;
@@ -58,7 +58,7 @@ public class ClienteDAOImpl implements ClienteDAO<Cliente> {
     public Optional<Cliente> find(int id) {
         Cliente cliente = jdbcTemplate
                 .queryForObject("SELECT * FROM cliente WHERE id = ?"
-                        , (rs, rowNum) -> new Cliente(rs.getInt("id"), rs.getString("nombre"), rs.getString("apellido1"), rs.getString("apellido2"), rs.getString("ciudad"), rs.getInt("categoría"))
+                        , (rs, rowNum) -> new Cliente(rs.getInt("id"), rs.getString("nombre"), rs.getString("apellido1"), rs.getString("apellido2"), rs.getString("ciudad"), rs.getInt("categoría"), rs.getString("email"))
                         , id
                 );
 
@@ -74,7 +74,7 @@ public class ClienteDAOImpl implements ClienteDAO<Cliente> {
     @Override
     public void update(Cliente cliente) {
         int rows = jdbcTemplate
-                .update("UPDATE cliente SET nombre = ? , apellido1 = ?, apellido2 = ?, ciudad = ?, categoría = ?  WHERE id = ?", cliente.getNombre(), cliente.getApellido1(), cliente.getApellido2(), cliente.getCiudad(), cliente.getCategoria(), cliente.getId());
+                .update("UPDATE cliente SET nombre = ? , apellido1 = ?, apellido2 = ?, ciudad = ?, categoría = ? , email = ? WHERE id = ?", cliente.getNombre(), cliente.getApellido1(), cliente.getApellido2(), cliente.getCiudad(), cliente.getCategoria(), cliente.getId(), cliente.getEmail());
         if (rows == 0) System.out.println("Update de cliente con 0 registros actualizados.");
     }
 
@@ -95,15 +95,16 @@ public class ClienteDAOImpl implements ClienteDAO<Cliente> {
 
         jdbcTemplate.update("""
                         INSERT INTO cliente
-                        (nombre, apellido1, apellido2, ciudad, categoría)
+                        (nombre, apellido1, apellido2, ciudad, categoría, email)
                         VALUE
-                        (?, ?, ?, ?, ?)
+                        (?, ?, ?, ?, ?, ?)
                         """
                 , cliente.getNombre()
                 , cliente.getApellido1()
                 , cliente.getApellido2()
                 , cliente.getCiudad()
-                , cliente.getCategoria());
+                , cliente.getCategoria()
+                , cliente.getEmail());
         //NO SE ACTUALIZA EL ID AUTO_INCREMENT DE MYSQL EN EL BEAN DE CLIENTE
     }
 
@@ -115,9 +116,9 @@ public class ClienteDAOImpl implements ClienteDAO<Cliente> {
             PreparedStatement ps = connection
                     .prepareStatement("""
                             INSERT INTO cliente
-                            (nombre, apellido1, apellido2, ciudad, categoría)
+                            (nombre, apellido1, apellido2, ciudad, categoría, email)
                             VALUE
-                            (?, ?, ?, ?, ?)
+                            (?, ?, ?, ?, ?, ?)
                             """, Statement.RETURN_GENERATED_KEYS);
             int idx = 1;
             ps.setString(idx++, cliente.getNombre());
@@ -125,6 +126,7 @@ public class ClienteDAOImpl implements ClienteDAO<Cliente> {
             ps.setString(idx++, cliente.getApellido2());
             ps.setString(idx++, cliente.getCiudad());
             ps.setInt(idx++, cliente.getCategoria());
+            ps.setString(idx++, cliente.getEmail());
             return ps;
         }, keyHolder);
 
@@ -143,7 +145,8 @@ public class ClienteDAOImpl implements ClienteDAO<Cliente> {
                 .addValue("apellido1", cliente.getApellido1())
                 .addValue("apellido2", cliente.getApellido2())
                 .addValue("ciudad", cliente.getCiudad())
-                .addValue("categoría", cliente.getCategoria());
+                .addValue("categoría", cliente.getCategoria())
+                .addValue("email", cliente.getEmail());;
         Number number = simpleJdbcInsert.executeAndReturnKey(params);
 
         cliente.setId(number.intValue());
