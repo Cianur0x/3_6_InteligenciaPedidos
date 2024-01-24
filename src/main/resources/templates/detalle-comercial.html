@@ -19,15 +19,15 @@
         <div class="card" style="width: 18rem;">
 
             <div class="card-body">
-                <h5 class="card-title" th:text="'ID: ' + ${comercial.id}"></h5>
+                <h5 class="card-title" th:text="'ID: ' + ${comercialDTO.id}"></h5>
             </div>
             <ul class="list-group list-group-flush">
-                <li class="list-group-item" th:text="${comercial.nombre}">ape1</li>
-                <li class="list-group-item" th:text="${comercial.apellido1}">ape1</li>
-                <li class="list-group-item" th:text="${comercial.apellido2}">ape2</li>
-                <li class="list-group-item" th:text="${comercial.comision}">city</li>
-                <li class="list-group-item" th:text="${total}">city</li>
-                <li class="list-group-item" th:text="${media}">city</li>
+                <li class="list-group-item" th:text="${comercialDTO.nombre}">ape1</li>
+                <li class="list-group-item" th:text="${comercialDTO.apellido1}">ape1</li>
+                <li class="list-group-item" th:text="${comercialDTO.apellido2}">ape2</li>
+                <li class="list-group-item" th:text="${comercialDTO.comision}">city</li>
+                <li class="list-group-item" th:text="${comercialDTO.media}">city</li>
+                <li class="list-group-item" th:text="${comercialDTO.total}">city</li>
             </ul>
 
         </div>
@@ -60,7 +60,7 @@
             </thead>
             <tbody>
             <!-- TODO saber como meter una condicional para cada caso -->
-            <tr th:each="pedido, iStat : ${pedidosLista}" th:class="${iStat.first ? 'bg-warning' : ''}"
+            <tr th:each="pedido, iStat : ${comercialDTO.pedidosOrdenados}" th:class="${iStat.first ? 'bg-warning' : ''}"
                 th:classappend="${iStat.last ? 'bg-success' :''}">
                 <th scope="row" th:text="${pedido.comercial.id}">Autor</th>
                 <td th:text="${pedido.id}">Título</td>
@@ -89,7 +89,7 @@
             </thead>
             <tbody>
             <!-- TODO saber como meter una condicional para cada caso -->
-            <tr th:each="pedidos : ${totalesCliente}">
+            <tr th:each="pedidos : ${comercialDTO.totalCLientesLista}">
                 <th scope="row" th:text="${pedidos.key}">a</th>
                 <td th:text="${pedidos.value}">a</td>
 

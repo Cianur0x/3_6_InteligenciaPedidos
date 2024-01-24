@@ -3,19 +3,22 @@ package org.iesvdm.ventassringboot.controller;
 import jakarta.validation.Valid;
 import org.iesvdm.ventassringboot.domain.Comercial;
 import org.iesvdm.ventassringboot.domain.Pedido;
+import org.iesvdm.ventassringboot.dto.ComercialDTO;
+import org.iesvdm.ventassringboot.mapper.ComercialMapper;
 import org.iesvdm.ventassringboot.service.ComercialService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.view.RedirectView;
 
+import java.math.BigDecimal;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 // @RequestMapping("/comerciales")
@@ -23,6 +26,9 @@ public class ComercialController {
     // Field injection is not recommended cuando usamos el @Autowired
     @Autowired
     private ComercialService comercialService;
+
+    @Autowired
+    private ComercialMapper comercialMapper;
 
     /**
      * Maneja las solicitudes GET para la página de inicio.
@@ -60,26 +66,15 @@ public class ComercialController {
     public String detalle(Model model, @PathVariable Integer id) {
 
         Comercial comercial = comercialService.one(id);
-        model.addAttribute("comercial", comercial);
-
-        // Métodos en Service de comercial para procesar información sobre los pedidos
-        // etsos campos deberianpertenecer a un dto asi solo tendriamos un addAtribute y seria de
-        // COMERCIALDTO
         List<Pedido> pedidos = comercialService.pedidosFromComercial(id);
-
-        var sortedTotales = comercialService.totalClienteSorted(pedidos);
-        model.addAttribute("totalesCliente", sortedTotales);
-
+        List<Map.Entry<Integer, Double>> sortedTotales = comercialService.totalClienteSorted(pedidos);
         List<Pedido> sortedByTotal = comercialService.pedidosSortedByTotal(pedidos);
-        model.addAttribute("pedidosLista", sortedByTotal);
+        BigDecimal sum = comercialService.totalPedidosComercial(pedidos);
+        BigDecimal media = comercialService.mediaPedidosComercial(pedidos);
 
-        var sum = comercialService.totalPedidosComercial(pedidos);
-        model.addAttribute("total", sum);
+        ComercialDTO comercialDTO = comercialMapper.comercialAComercialDTO(comercial, media, sum, sortedTotales, sortedByTotal);
+        model.addAttribute("comercialDTO", comercialDTO);
 
-        var media = comercialService.mediaPedidosComercial(pedidos);
-        model.addAttribute("media", media);
-
-        // get pedido by ID
         return "detalle-comercial";
     }
 

@@ -11,7 +11,7 @@ public class ExceptionController {
     @ExceptionHandler(Exception.class)
     public String manejarException(Exception exception) {
 
-        log.info(exception.getMessage());
+        log.info("AQUI " + exception.getMessage());
 
         return "error";
     }
@@ -20,7 +20,7 @@ public class ExceptionController {
     @ExceptionHandler(RuntimeException.class)
     public String manejarExceptionRuntime(RuntimeException exception) {
 
-        log.info(exception.getMessage());
+        log.info( "AQUI 2 " + exception.getMessage());
 
         return "error";
     }
