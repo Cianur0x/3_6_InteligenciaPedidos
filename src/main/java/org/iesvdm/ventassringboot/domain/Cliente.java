@@ -9,21 +9,21 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Cliente {
-    @NotNull
+    // @Min(value = )
     private int id;
 
     @NotBlank(message = "{nombre.error.blank}")
-    @Size(max = 30, message = "Nombre como máximo de 30 caracteres.")
+    @Size(max = 30, message = "{nombre.error.size")
     private String nombre;
 
-    @NotBlank(message = "Por favor, introduzca su primer apellido.")
-    @Size(max = 30, message = "Apellido como máximo de 30 caracteres.")
+    @NotBlank(message = "{ape1.error.blank}")
+    @Size(max = 30, message = "")
     private String apellido1;
 
     private String apellido2;
 
-    @NotBlank(message = "Por favor, introduzca una ciudad.")
-    @Size(max = 50, message = "Ciudad máximo de 50 caracteres.")
+    @NotBlank(message = "{ciudad.error.blank}")
+    @Size(max = 50, message = "{ciudad.error.size}")
     private String ciudad;
 
     @NotNull(message = "Por favor, introduzca una categoría.")
@@ -31,6 +31,6 @@ public class Cliente {
     @Max(value = 1000, message = "La categoría deber ser menor que 1000")
     private int categoria;
 
-    @Email(message = "{error.email.cli} '${validatedValue}'", regexp="^[a-zA-Z0-9._-]+@[a-zA-Z0-9-]+\\.[a-zA-Z.]{2,5}")
+    @Email(message = "{error.email.cli} '${validatedValue}'", regexp = "^[a-zA-Z0-9._-]+@[a-zA-Z0-9-]+\\.[a-zA-Z.]{2,5}")
     private String email;
 }

@@ -67,7 +67,6 @@ public class ComercialService {
 
     // List<Map.Entry<Integer, Double>>
     public List<Map.Entry<Integer, Double>> totalClienteSorted(List<Pedido> pedidos) {
-        // TODO ordenar segun el TOTAL de todos los pedidos de un cliente
         // listado de clientes ordenados por cuantía de pedido de mayor a menor. El listado iría a continuación del listado de pedidos
         // Lista de clientes con el total de pedidos
         Map<Integer, Double> idCLiente = pedidos.stream()

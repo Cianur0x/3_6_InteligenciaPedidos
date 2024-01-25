@@ -15,15 +15,11 @@ public class ClienteDTO {
     private String ciudad;
     private int categoria;
     private String email;
-    // map para conteo de pedidos segun comercial
-    // private List<Comercial> comercialesAsociados;
-    // numero de pedidos realizados en el trimestre, semestre, año y lustro = 5años
     private Map<Integer, Long> comercialesAsociados;
     private Long pedidosTrimestre;
     private Long pedidosSemestre;
     private Long pedidosAnio;
     private Long pedidosLustro;
-
 
 }
 

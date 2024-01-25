@@ -59,7 +59,6 @@
             </tr>
             </thead>
             <tbody>
-            <!-- TODO saber como meter una condicional para cada caso -->
             <tr th:each="pedido, iStat : ${comercialDTO.pedidosOrdenados}" th:class="${iStat.first ? 'bg-warning' : ''}"
                 th:classappend="${iStat.last ? 'bg-success' :''}">
                 <th scope="row" th:text="${pedido.comercial.id}">Autor</th>
@@ -88,7 +87,6 @@
             </tr>
             </thead>
             <tbody>
-            <!-- TODO saber como meter una condicional para cada caso -->
             <tr th:each="pedidos : ${comercialDTO.totalCLientesLista}">
                 <th scope="row" th:text="${pedidos.key}">a</th>
                 <td th:text="${pedidos.value}">a</td>
