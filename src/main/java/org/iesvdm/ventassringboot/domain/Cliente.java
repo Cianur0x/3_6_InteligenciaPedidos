@@ -17,7 +17,7 @@ public class Cliente {
     private String nombre;
 
     @NotBlank(message = "{ape1.error.blank}")
-    @Size(max = 30, message = "")
+    @Size(max = 30, message = "{ape.error.size}")
     private String apellido1;
 
     private String apellido2;
@@ -26,7 +26,7 @@ public class Cliente {
     @Size(max = 50, message = "{ciudad.error.size}")
     private String ciudad;
 
-    @NotNull(message = "Por favor, introduzca una categoría.")
+    @NotNull(message = "")
     @Min(value = 100, message = "La categoría debe ser mayor a 100")
     @Max(value = 1000, message = "La categoría deber ser menor que 1000")
     private int categoria;

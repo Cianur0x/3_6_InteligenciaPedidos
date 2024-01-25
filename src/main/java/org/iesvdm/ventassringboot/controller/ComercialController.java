@@ -67,12 +67,17 @@ public class ComercialController {
 
         Comercial comercial = comercialService.one(id);
         List<Pedido> pedidos = comercialService.pedidosFromComercial(id);
-        List<Map.Entry<Integer, Double>> sortedTotales = comercialService.totalClienteSorted(pedidos);
-        List<Pedido> sortedByTotal = comercialService.pedidosSortedByTotal(pedidos);
-        BigDecimal sum = comercialService.totalPedidosComercial(pedidos);
-        BigDecimal media = comercialService.mediaPedidosComercial(pedidos);
+        ComercialDTO comercialDTO = null;
+        if (!pedidos.isEmpty()) {
+            List<Map.Entry<Integer, Double>> sortedTotales = comercialService.totalClienteSorted(pedidos);
+            List<Pedido> sortedByTotal = comercialService.pedidosSortedByTotal(pedidos);
+            BigDecimal sum = comercialService.totalPedidosComercial(pedidos);
+            BigDecimal media = comercialService.mediaPedidosComercial(pedidos);
+            comercialDTO = comercialMapper.comercialAComercialDTO(comercial, media, sum, sortedTotales, sortedByTotal);
+        } else {
+            comercialDTO = comercialMapper.comercialDTOtoComercial(comercial);
+        }
 
-        ComercialDTO comercialDTO = comercialMapper.comercialAComercialDTO(comercial, media, sum, sortedTotales, sortedByTotal);
         model.addAttribute("comercialDTO", comercialDTO);
 
         return "detalle-comercial";

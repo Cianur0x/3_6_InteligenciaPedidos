@@ -18,5 +18,7 @@ public interface ComercialMapper {
     @Mapping(source = "pedidosOrdenadosIn", target = "pedidosOrdenados")
     public ComercialDTO comercialAComercialDTO(Comercial comercial, BigDecimal mediaIn, BigDecimal totalIn, List<Map.Entry<Integer, Double>> totalCLientesListaIn, List<Pedido> pedidosOrdenadosIn);
 
+    public ComercialDTO comercialDTOtoComercial(Comercial comercial);
+
     public Comercial comercialDTOAComercial(ComercialDTO comercialDTO);
 }

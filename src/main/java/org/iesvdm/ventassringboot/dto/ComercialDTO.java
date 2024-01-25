@@ -2,6 +2,7 @@ package org.iesvdm.ventassringboot.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import org.iesvdm.ventassringboot.domain.Comercial;
 import org.iesvdm.ventassringboot.domain.Pedido;
 
 import java.math.BigDecimal;

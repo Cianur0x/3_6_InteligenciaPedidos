@@ -22,12 +22,21 @@
                 <h5 class="card-title" th:text="'ID: ' + ${comercialDTO.id}"></h5>
             </div>
             <ul class="list-group list-group-flush">
-                <li class="list-group-item" th:text="${comercialDTO.nombre}">ape1</li>
-                <li class="list-group-item" th:text="${comercialDTO.apellido1}">ape1</li>
-                <li class="list-group-item" th:text="${comercialDTO.apellido2}">ape2</li>
-                <li class="list-group-item" th:text="${comercialDTO.comision}">city</li>
-                <li class="list-group-item" th:text="${comercialDTO.media}">city</li>
-                <li class="list-group-item" th:text="${comercialDTO.total}">city</li>
+                <li class="list-group-item" th:text="#{nombre} + ' ' + ${comercialDTO.nombre}">ape1</li>
+                <li class="list-group-item" th:text="#{apell1} + ' ' + ${comercialDTO.apellido1}">ape1</li>
+                <li class="list-group-item" th:text="#{apell2} + ' ' + ${comercialDTO.apellido2}">ape2</li>
+                <li class="list-group-item"
+                    th:text="#{comercialCom} + ' ' + ${#numbers.formatDecimal(comercialDTO.comision, 1, 'DEFAULT', 2, 'DEFAULT')}">
+                    city
+                </li>
+                <li class="list-group-item" th:if="${comercialDTO.media}"
+                    th:text="#{media.pedido} + ' ' + ${#numbers.formatDecimal(comercialDTO.media, 1, 'DEFAULT', 2, 'DEFAULT')}">
+                    city
+                </li>
+                <li class="list-group-item" th:if="${comercialDTO.total}"
+                    th:text="#{total.pedido} + ' ' +${#numbers.formatDecimal(comercialDTO.total, 1, 'DEFAULT', 2, 'DEFAULT')}">
+                    city
+                </li>
             </ul>
 
         </div>
@@ -36,64 +45,68 @@
         </a>
     </div>
 </div>
-<div class="d-flex justify-content-center">
+<div th:if="${comercialDTO.pedidosOrdenados}">
 
-    <div class="bg-warning w-10 p-3 text-center"><strong>Pedido mínimo</strong></div>
-    <div class="bg-success w-10 p-3  text-center"><strong>Pedido máximo</strong></div>
+    <div class="d-flex justify-content-center">
 
-</div>
-<div class="d-flex justify-content-center">
-    <div class="w-75">
-        <div class="row d-flex justify-content-center align-items-center">
-            <h1 class="text-center" th:text="#{pedido}">Pedidos</h1>
-        </div>
-        <table class="table table-striped">
-            <thead>
-            <tr>
-                <th scope="col" th:text="#{pediCom}">ID Comercial</th>
-                <th scope="col" th:text="#{idPedido}">ID Pedido</th>
-                <th scope="col" th:text="#{totalPed}">Total</th>
-                <th scope="col" th:text="#{fechaPed}">Fecha</th>
-                <th scope="col" th:text="#{pediCli}">ID Cliente</th>
-                <th scope="col" th:text="#{pediCliNom}">Nombre Cliente</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr th:each="pedido, iStat : ${comercialDTO.pedidosOrdenados}" th:class="${iStat.first ? 'bg-warning' : ''}"
-                th:classappend="${iStat.last ? 'bg-success' :''}">
-                <th scope="row" th:text="${pedido.comercial.id}">Autor</th>
-                <td th:text="${pedido.id}">Título</td>
-                <td th:text="${pedido.total}">Título</td>
-                <td th:text="${pedido.fecha}">Autor</td>
-                <td th:text="${pedido.cliente.id}">Título</td>
-                <td>
-                    <a th:href="@{/clientes/__${pedido.cliente.id}__}" th:text="${pedido.cliente.nombre}"></a>
-                </td>
-            </tr>
-            </tbody>
-        </table>
+        <div class="bg-warning w-10 p-3 text-center"><strong th:text="#{pedido.min}"></strong></div>
+        <div class="bg-success w-10 p-3  text-center"><strong th:text="#{pedido.max}">Pedido máximo</strong></div>
+
     </div>
-</div>
-<div class="d-flex justify-content-center">
-    <div class="w-75">
-        <div class="row d-flex justify-content-center align-items-center">
-            <h1 class="text-center" th:text="#{pedido}">Pedidos</h1>
+    <div class="d-flex justify-content-center">
+        <div class="w-75">
+            <div class="row d-flex justify-content-center align-items-center">
+                <h1 class="text-center" th:text="#{pedido}">Pedidos</h1>
+            </div>
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th scope="col" th:text="#{pediCom}">ID Comercial</th>
+                    <th scope="col" th:text="#{idPedido}">ID Pedido</th>
+                    <th scope="col" th:text="#{totalPed}">Total</th>
+                    <th scope="col" th:text="#{fechaPed}">Fecha</th>
+                    <th scope="col" th:text="#{pediCli}">ID Cliente</th>
+                    <th scope="col" th:text="#{pediCliNom}">Nombre Cliente</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="pedido, iStat : ${comercialDTO.pedidosOrdenados}"
+                    th:class="${iStat.first ? 'bg-warning' : ''}"
+                    th:classappend="${iStat.last ? 'bg-success' :''}">
+                    <th scope="row" th:text="${pedido.comercial.id}">Autor</th>
+                    <td th:text="${pedido.id}">Título</td>
+                    <td th:text="${#numbers.formatDecimal(pedido.total, 1, 'DEFAULT', 2, 'DEFAULT')}">Título</td>
+                    <td th:text="${pedido.fecha}">Autor</td>
+                    <td th:text="${pedido.cliente.id}">Título</td>
+                    <td>
+                        <a th:href="@{/clientes/__${pedido.cliente.id}__}" th:text="${pedido.cliente.nombre}"></a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
         </div>
-        <table class="table table-striped">
-            <thead>
-            <tr>
-                <th scope="col" th:text="#{pediCli}">ID Cliente</th>
-                <th scope="col" th:text="#{totalPed}">Total</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr th:each="pedidos : ${comercialDTO.totalCLientesLista}">
-                <th scope="row" th:text="${pedidos.key}">a</th>
-                <td th:text="${pedidos.value}">a</td>
+    </div>
+    <div class="d-flex justify-content-center">
+        <div class="w-75">
+            <div class="row d-flex justify-content-center align-items-center">
+                <h1 class="text-center" th:text="#{pedido}">Pedidos</h1>
+            </div>
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th scope="col" th:text="#{pediCli}">ID Cliente</th>
+                    <th scope="col" th:text="#{totalPed}">Total</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="pedidos : ${comercialDTO.totalCLientesLista}">
+                    <th scope="row" th:text="${pedidos.key}">a</th>
+                    <td th:text="${#numbers.formatDecimal(pedidos.value, 1, 'DEFAULT', 2, 'DEFAULT')}">a</td>
 
-            </tr>
-            </tbody>
-        </table>
+                </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
 </div>
 <!-- Optional JavaScript -->
