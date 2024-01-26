@@ -22,14 +22,15 @@
                 <h5 class="card-title" th:text="'ID: ' + ${cliente.id}"></h5>
             </div>
             <ul class="list-group list-group-flush">
-                <li class="list-group-item" th:text="${cliente.nombre}">ape1</li>
-                <li class="list-group-item" th:text="${cliente.apellido2}">ape2</li>
-                <li class="list-group-item" th:text="${cliente.ciudad}">city</li>
-                <li class="list-group-item" th:text="${cliente.categoria}">cat</li>
-                <li class="list-group-item" th:text="${cliente.pedidosTrimestre} + ' pedidos Trimestre'">cat</li>
-                <li class="list-group-item" th:text="${cliente.pedidosSemestre} + ' pedidos Semestre'">cat</li>
-                <li class="list-group-item" th:text="${cliente.pedidosAnio} + ' pedidos Anio'">cat</li>
-                <li class="list-group-item" th:text="${cliente.pedidosLustro} + ' pedidos Lustro'">cat</li>
+                <li class="list-group-item" th:text="#{nombre} + ' ' + ${cliente.nombre}">ape1</li>
+                <li class="list-group-item" th:text="#{apell1} + ' ' + ${cliente.apellido1}">ape2</li>
+                <li class="list-group-item" th:text="#{apell2} + ' ' + ${cliente.apellido2}">ape2</li>
+                <li class="list-group-item" th:text="#{clienteCiudad} + ' ' + ${cliente.ciudad}">city</li>
+                <li class="list-group-item" th:text="#{clienteCat} + ' ' + ${cliente.categoria}">cat</li>
+                <li class="list-group-item" th:text="${cliente.pedidosTrimestre} + ' ' + #{pedidos.trimestre}">cat</li>
+                <li class="list-group-item" th:text="${cliente.pedidosSemestre} + ' ' + #{pedidos.semestre}">cat</li>
+                <li class="list-group-item" th:text="${cliente.pedidosAnio} + ' ' + #{pedidos.anio}">cat</li>
+                <li class="list-group-item" th:text="${cliente.pedidosLustro} + ' ' + #{pedidos.lustro}">cat</li>
 
             </ul>
 
@@ -48,8 +49,8 @@
         <table class="table table-striped">
             <thead>
             <tr>
-                <th scope="col">ID Comercial</th>
-                <th scope="col">Conteo</th>
+                <th scope="col" th:text="#{pediCom}">ID Comercial</th>
+                <th scope="col" th:text="#{total.pedido}">Conteo</th>
             </tr>
             </thead>
             <tbody>

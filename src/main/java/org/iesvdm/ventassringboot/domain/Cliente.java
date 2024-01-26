@@ -9,15 +9,15 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Cliente {
-    // @Min(value = )
+    @Min(value = 1, message = "{id.error.min}")
     private int id;
 
     @NotBlank(message = "{nombre.error.blank}")
-    @Size(max = 30, message = "{nombre.error.size")
+    @Size(max = 30, message = "{nombre.error.size}")
     private String nombre;
 
     @NotBlank(message = "{ape1.error.blank}")
-    @Size(max = 30, message = "{ape.error.size}")
+    @Size(max = 30, message = "{ape1.error.size}")
     private String apellido1;
 
     private String apellido2;
@@ -26,9 +26,8 @@ public class Cliente {
     @Size(max = 50, message = "{ciudad.error.size}")
     private String ciudad;
 
-    @NotNull(message = "")
-    @Min(value = 100, message = "La categoría debe ser mayor a 100")
-    @Max(value = 1000, message = "La categoría deber ser menor que 1000")
+    @Min(value = 100, message = "{categoria.error.min}")
+    @Max(value = 1000, message = "{categoria.error.max}")
     private int categoria;
 
     @Email(message = "{error.email.cli} '${validatedValue}'", regexp = "^[a-zA-Z0-9._-]+@[a-zA-Z0-9-]+\\.[a-zA-Z.]{2,5}")
