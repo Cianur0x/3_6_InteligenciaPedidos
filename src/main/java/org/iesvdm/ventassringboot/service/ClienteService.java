@@ -22,9 +22,6 @@ public class ClienteService implements ServiceBase<Cliente> {
     private ClienteDAO<Cliente> clienteDAO;
 
     @Autowired
-    private ComercialDAO<Comercial> comercialDAO;
-
-    @Autowired
     private PedidoDAO<Pedido> pedidoDAO;
 
     public List<Cliente> listAll() {
@@ -56,54 +53,81 @@ public class ClienteService implements ServiceBase<Cliente> {
         return pedidoDAO.getAll().stream().filter(pedido -> pedido.getIdCliente() == idCliente).toList();
     }
 
+    /**
+     * Devuelve comerciales asociados con el cliente, los busca según los pedidos del cliente
+     *
+     * @param idCliente pedidos de un cliente
+     * @return Key, el id de comercial, Value, el nº de pedidos realizados con el comercial
+     */
     public Map<Integer, Long> comercialesAsociados(int idCliente) {
         List<Pedido> pedidosAsociados = pedidosAsociados(idCliente);
 
         return pedidosAsociados.stream().collect(Collectors.groupingBy(Pedido::getIdComercial, Collectors.counting()));
     }
 
+    /**
+     * Pedidos realizado en el trimestre del cliente con {@param idCliente}
+     *
+     * @param idCliente pedidos de un cliente
+     * @return Nº Pedidos de un Cliente en el Trimestre
+     */
     public Long pedidosTrimestre(int idCliente) {
         List<Pedido> pedidosA = pedidosAsociados(idCliente);
 
         LocalDate hoy = LocalDate.now();
         Period periodo = Period.ofMonths(3);
         LocalDate trimestreAnterior = hoy.minus(periodo);
-        // DateTimeFormatter f = DateTimeFormatter.ofPattern();
 
         return pedidosA.stream()
                 .filter(pedido -> pedido.getFecha().isAfter(trimestreAnterior) && pedido.getFecha().isBefore(hoy)).count();
     }
 
-    public Long pedidosSemestre (int idCliente) {
+    /**
+     * Pedidos realizado en el semestre del cliente con {@param idCliente}
+     *
+     * @param idCliente pedidos de un cliente
+     * @return Nº Pedidos de un Cliente en el Semestre
+     */
+    public Long pedidosSemestre(int idCliente) {
         List<Pedido> pedidosA = pedidosAsociados(idCliente);
 
         LocalDate hoy = LocalDate.now();
         Period periodo = Period.ofMonths(6);
         LocalDate semestreAnte = hoy.minus(periodo);
-        // DateTimeFormatter f = DateTimeFormatter.ofPattern();
 
         return pedidosA.stream()
                 .filter(pedido -> pedido.getFecha().isAfter(semestreAnte) && pedido.getFecha().isBefore(hoy)).count();
     }
 
+    /**
+     * Pedidos realizado en el año del cliente con {@param idCliente}
+     *
+     * @param idCliente pedidos de un cliente
+     * @return Nº Pedidos de un Cliente en el Año
+     */
     public Long pedidosAnio(int idCliente) {
         List<Pedido> pedidosA = pedidosAsociados(idCliente);
 
         LocalDate hoy = LocalDate.now();
         Period periodo = Period.ofYears(1);
         LocalDate minusYear = hoy.minus(periodo);
-        // DateTimeFormatter f = DateTimeFormatter.ofPattern();
 
         return pedidosA.stream()
                 .filter(pedido -> pedido.getFecha().isAfter(minusYear) && pedido.getFecha().isBefore(hoy)).count();
     }
+
+    /**
+     * Pedidos realizado en el lustro del cliente con {@param idCliente}
+     *
+     * @param idCliente pedidos de un cliente
+     * @return Nº Pedidos de un Cliente en el Lustro
+     */
     public Long pedidosLustro(int idCliente) {
         List<Pedido> pedidosA = pedidosAsociados(idCliente);
 
         LocalDate hoy = LocalDate.now();
         Period periodo = Period.ofYears(5);
         LocalDate minusYear = hoy.minus(periodo);
-        // DateTimeFormatter f = DateTimeFormatter.ofPattern();
 
         return pedidosA.stream()
                 .filter(pedido -> pedido.getFecha().isAfter(minusYear) && pedido.getFecha().isBefore(hoy)).count();
