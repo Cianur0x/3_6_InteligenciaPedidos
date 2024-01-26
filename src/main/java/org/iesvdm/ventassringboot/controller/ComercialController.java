@@ -141,11 +141,16 @@ public class ComercialController {
      * @return Una redirección a la lista de comerciales después de la edición.
      */
     @PostMapping("/comerciales/editar/{id}")
-    public RedirectView submitEditar(@ModelAttribute("comercial") Comercial comercial) {
+    public String submitEditar(@Valid @ModelAttribute("comercial") Comercial comercial, BindingResult bindingResult, Model model) {
+
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("comercial", comercial);
+
+            return "editar-comercial";
+        }
 
         comercialService.replaceComercial(comercial);
-
-        return new RedirectView("/comerciales");
+        return "redirect:/comerciales";
     }
 
     /**

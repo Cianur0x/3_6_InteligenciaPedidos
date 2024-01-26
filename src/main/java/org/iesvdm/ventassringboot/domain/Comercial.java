@@ -11,22 +11,23 @@ import java.math.BigDecimal;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Comercial {
-    @NotNull
+
+    @Min(value = 1, message = "{id.error.min}")
     private int id;
 
-    @NotBlank(message = "Por favor, introduzca nombre.")
-    @Size(max = 30, message = "Nombre como máximo de  {max} caracteres.")
+    @NotBlank(message = "{nombre.error.blank}")
+    @Size(max = 30, message = "{nombre.error.size}")
     private String nombre;
 
-    @NotBlank(message = "Por favor, introduzca su primer apellido.")
-    @Size(max = 30, message = "Apellido como máximo de {max} caracteres.")
+    @NotBlank(message = "{ape1.error.blank}")
+    @Size(max = 30, message = "{ape1.error.size}")
     private String apellido1;
 
     private String apellido2;
 
     // poner  inclusive=true es reduntante, por defecto true
-    @NotNull(message = "Por favor, introduzca una comisión")
-    @DecimalMax(value = "0.946", message = "El valor tiene que ser menor que {value}")
-    @DecimalMin(value = "0.276", message = "El valor tiene que ser mayor a {value}")
+    @NotNull(message = "{comision.error.null}")
+    @DecimalMax(value = "0.946", message = "{comision.error.max}")
+    @DecimalMin(value = "0.276", message = "{comision.error.min}")
     private BigDecimal comision;
 }

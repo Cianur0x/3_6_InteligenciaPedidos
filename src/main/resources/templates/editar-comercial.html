@@ -20,23 +20,38 @@
             <div class="form-group">
                 <label for="id">ID</label>
                 <input type="text" class="form-control" id="id" th:field="*{id}" placeholder="ID" readonly>
+                <ul class="text-danger" th:if="${#fields.hasErrors('id')}">
+                    <li th:each="err : ${#fields.errors('id')}" th:text="${err}"/>
+                </ul>
             </div>
             <div class="form-group">
                 <label for="nombre" th:text="#{comercialNombre}">Nombre</label>
                 <input type="text" class="form-control" id="nombre" th:field="*{nombre}" placeholder="Nombre">
+                <ul class="text-danger" th:if="${#fields.hasErrors('nombre')}">
+                    <li th:each="err : ${#fields.errors('nombre')}" th:text="${err}"/>
+                </ul>
             </div>
             <div class="form-group">
                 <label for="ape1" th:text="#{comercialAp1}">Apellido1</label>
                 <input type="text" class="form-control" id="ape1" th:field="*{apellido1}" placeholder="Primer Apellido">
+                <ul class="text-danger" th:if="${#fields.hasErrors('apellido1')}">
+                    <li th:each="err : ${#fields.errors('apellido1')}" th:text="${err}"/>
+                </ul>
             </div>
             <div class="form-group">
                 <label for="ape2" th:text="#{comercialAp2}">Apellido2</label>
                 <input type="text" class="form-control" id="ape2" placeholder="Segundo Apellido"
                        th:field="*{apellido2}">
+                <ul class="text-danger" th:if="${#fields.hasErrors('apellido2')}">
+                    <li th:each="err : ${#fields.errors('apellido2')}" th:text="${err}"/>
+                </ul>
             </div>
             <div class="form-group">
                 <label for="com" th:text="#{comercialCom}">Comisión</label>
                 <input type="text" class="form-control" id="com" placeholder="Comision" th:field="*{comision}">
+                <ul class="text-danger" th:if="${#fields.hasErrors('comision')}">
+                    <li th:each="err : ${#fields.errors('comision')}" th:text="${err}"/>
+                </ul>
             </div>
             <a href="/comerciales" class="btn btn-info"> <i class="fas fa-arrow-left  "></i>
                 <th:block th:text="#{btnVolver}"></th:block>
