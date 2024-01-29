@@ -12,7 +12,6 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 public class Comercial {
 
-    @Min(value = 1, message = "{id.error.min}")
     private int id;
 
     @NotBlank(message = "{nombre.error.blank}")

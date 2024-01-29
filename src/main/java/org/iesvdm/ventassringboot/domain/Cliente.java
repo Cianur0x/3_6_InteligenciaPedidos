@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Cliente {
-    @Min(value = 1, message = "{id.error.min}")
+
     private int id;
 
     @NotBlank(message = "{nombre.error.blank}")

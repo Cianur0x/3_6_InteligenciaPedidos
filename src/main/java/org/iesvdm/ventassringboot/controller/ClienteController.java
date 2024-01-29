@@ -1,6 +1,7 @@
 package org.iesvdm.ventassringboot.controller;
 
 import jakarta.validation.Valid;
+import lombok.extern.slf4j.Slf4j;
 import org.iesvdm.ventassringboot.domain.Cliente;
 import org.iesvdm.ventassringboot.dto.ClienteDTO;
 import org.iesvdm.ventassringboot.mapper.ClienteMapper;
@@ -17,7 +18,7 @@ import org.springframework.web.servlet.view.RedirectView;
 
 import java.util.List;
 import java.util.Map;
-
+@Slf4j
 @Controller
 // @RequestMapping("/clientes")
 public class ClienteController {
@@ -93,7 +94,7 @@ public class ClienteController {
 
         if (bindingResulted.hasErrors()) {
             model.addAttribute("cliente", cliente);
-
+            log.info("ola crear cliente" + cliente.toString());
             return "crear-cliente";
         }
         clienteService.create(cliente);
