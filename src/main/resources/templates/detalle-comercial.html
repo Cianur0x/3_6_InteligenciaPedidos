@@ -17,7 +17,6 @@
 <div class="d-flex justify-content-center align-items-center">
     <div class="w-25 d-flex flex-column justify-content-center align-items-center p-2">
         <div class="card" style="width: 18rem;">
-
             <div class="card-body">
                 <h5 class="card-title" th:text="'ID: ' + ${comercialDTO.id}"></h5>
             </div>
@@ -38,20 +37,17 @@
                     city
                 </li>
             </ul>
-
         </div>
         <a href="/comerciales" class="btn btn-info m-2"> <i class="fas fa-arrow-left  "></i>
             <th:block th:text="#{btnVolver}"></th:block>
         </a>
     </div>
 </div>
+
 <div th:if="${comercialDTO.pedidosOrdenados}">
-
     <div class="d-flex justify-content-center">
-
         <div class="bg-warning w-10 p-3 text-center"><strong th:text="#{pedido.min}"></strong></div>
         <div class="bg-success w-10 p-3  text-center"><strong th:text="#{pedido.max}">Pedido máximo</strong></div>
-
     </div>
     <div class="d-flex justify-content-center">
         <div class="w-75">
@@ -95,14 +91,15 @@
                 <thead>
                 <tr>
                     <th scope="col" th:text="#{pediCli}">ID Cliente</th>
+                    <th scope="col" th:text="#{nombre}">Total</th>
                     <th scope="col" th:text="#{totalPed}">Total</th>
                 </tr>
                 </thead>
                 <tbody>
                 <tr th:each="pedidos : ${comercialDTO.totalCLientesLista}">
-                    <th scope="row" th:text="${pedidos.key}">a</th>
+                    <th scope="row" th:text="${pedidos.key.id}">a</th>
+                    <td th:text="${pedidos.key.nombre}">a</td>
                     <td th:text="${#numbers.formatDecimal(pedidos.value, 1, 'DEFAULT', 2, 'DEFAULT')}">a</td>
-
                 </tr>
                 </tbody>
             </table>

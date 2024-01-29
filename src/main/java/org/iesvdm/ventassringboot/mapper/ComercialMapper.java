@@ -1,5 +1,6 @@
 package org.iesvdm.ventassringboot.mapper;
 
+import org.iesvdm.ventassringboot.domain.Cliente;
 import org.iesvdm.ventassringboot.domain.Comercial;
 import org.iesvdm.ventassringboot.domain.Pedido;
 import org.iesvdm.ventassringboot.dto.ComercialDTO;
@@ -16,7 +17,7 @@ public interface ComercialMapper {
     @Mapping(source = "totalIn", target = "total")
     @Mapping(source = "totalCLientesListaIn", target = "totalCLientesLista")
     @Mapping(source = "pedidosOrdenadosIn", target = "pedidosOrdenados")
-    public ComercialDTO comercialAComercialDTO(Comercial comercial, BigDecimal mediaIn, BigDecimal totalIn, List<Map.Entry<Integer, Double>> totalCLientesListaIn, List<Pedido> pedidosOrdenadosIn);
+    public ComercialDTO comercialAComercialDTO(Comercial comercial, BigDecimal mediaIn, BigDecimal totalIn, List<Map.Entry<Cliente, Double>> totalCLientesListaIn, List<Pedido> pedidosOrdenadosIn);
 
     public ComercialDTO comercialDTOtoComercial(Comercial comercial);
 

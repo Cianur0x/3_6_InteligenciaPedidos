@@ -2,7 +2,7 @@ package org.iesvdm.ventassringboot.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import org.iesvdm.ventassringboot.domain.Comercial;
+import org.iesvdm.ventassringboot.domain.Cliente;
 import org.iesvdm.ventassringboot.domain.Pedido;
 
 import java.math.BigDecimal;
@@ -21,5 +21,5 @@ public class ComercialDTO {
     private BigDecimal media;
     private BigDecimal total;
     private List<Pedido> pedidosOrdenados;
-    private List<Map.Entry<Integer, Double>> totalCLientesLista;
+    private List<Map.Entry<Cliente, Double>> totalCLientesLista;
 }

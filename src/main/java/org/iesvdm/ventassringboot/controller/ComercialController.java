@@ -1,6 +1,7 @@
 package org.iesvdm.ventassringboot.controller;
 
 import jakarta.validation.Valid;
+import org.iesvdm.ventassringboot.domain.Cliente;
 import org.iesvdm.ventassringboot.domain.Comercial;
 import org.iesvdm.ventassringboot.domain.Pedido;
 import org.iesvdm.ventassringboot.dto.ComercialDTO;
@@ -69,7 +70,7 @@ public class ComercialController {
         List<Pedido> pedidos = comercialService.pedidosFromComercial(id);
         ComercialDTO comercialDTO = null;
         if (!pedidos.isEmpty()) {
-            List<Map.Entry<Integer, Double>> sortedTotales = comercialService.totalClienteSorted(pedidos);
+            List<Map.Entry<Cliente, Double>> sortedTotales = comercialService.totalClienteSorted(pedidos);
             List<Pedido> sortedByTotal = comercialService.pedidosSortedByTotal(pedidos);
             BigDecimal sum = comercialService.totalPedidosComercial(pedidos);
             BigDecimal media = comercialService.mediaPedidosComercial(pedidos);

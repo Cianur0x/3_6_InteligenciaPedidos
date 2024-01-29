@@ -2,6 +2,7 @@ package org.iesvdm.ventassringboot.service;
 
 import org.iesvdm.ventassringboot.dao.ComercialDAO;
 import org.iesvdm.ventassringboot.dao.PedidoDAO;
+import org.iesvdm.ventassringboot.domain.Cliente;
 import org.iesvdm.ventassringboot.domain.Comercial;
 import org.iesvdm.ventassringboot.domain.Pedido;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -85,15 +86,15 @@ public class ComercialService {
      * @param pedidos lisa de la que e filtra
      * @return lista con id y total de pedidos por cliente
      */
-    public List<Map.Entry<Integer, Double>> totalClienteSorted(List<Pedido> pedidos) {
+    public List<Map.Entry<Cliente, Double>> totalClienteSorted(List<Pedido> pedidos) {
         // listado de clientes ordenados por cuantía de pedido de mayor a menor. El listado iría a continuación del listado de pedidos
         // Lista de clientes con el total de pedidos
-        Map<Integer, Double> idCLiente = pedidos.stream()
-                .collect(Collectors.groupingBy(Pedido::getIdCliente, Collectors.summingDouble(Pedido::getTotal)));
+        Map<Cliente, Double> idCLiente = pedidos.stream()
+                .collect(Collectors.groupingBy(Pedido::getCliente, Collectors.summingDouble(Pedido::getTotal)));
 
         // Ordenar el mapa por valores (totales) de mayor a menor
         var sortedTotales = idCLiente.entrySet().stream()
-                .sorted(Map.Entry.<Integer, Double>comparingByValue().reversed())
+                .sorted(Map.Entry.<Cliente, Double>comparingByValue().reversed())
                 .toList();
 
         return sortedTotales;
