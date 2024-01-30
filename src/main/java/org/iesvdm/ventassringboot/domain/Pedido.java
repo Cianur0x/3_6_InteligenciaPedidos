@@ -1,8 +1,13 @@
 package org.iesvdm.ventassringboot.domain;
 
+import jakarta.validation.constraints.DecimalMax;
+import jakarta.validation.constraints.DecimalMin;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
 
@@ -10,10 +15,16 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Pedido {
+
     private int id;
+
     private Double total;
+
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate fecha;
+
     private int idCliente;
+
     private int idComercial;
     private Cliente cliente;
     private Comercial comercial;

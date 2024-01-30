@@ -1,5 +1,6 @@
 package org.iesvdm.ventassringboot.dao;
 
+import lombok.extern.slf4j.Slf4j;
 import org.iesvdm.ventassringboot.domain.Comercial;
 import org.iesvdm.ventassringboot.domain.Pedido;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -9,6 +10,7 @@ import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 
+@Slf4j
 @Repository
 public class ComercialDAOImpl implements ComercialDAO<Comercial> {
 

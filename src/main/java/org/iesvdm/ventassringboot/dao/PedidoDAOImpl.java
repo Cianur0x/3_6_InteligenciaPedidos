@@ -1,5 +1,6 @@
 package org.iesvdm.ventassringboot.dao;
 
+import lombok.extern.slf4j.Slf4j;
 import org.iesvdm.ventassringboot.domain.Cliente;
 import org.iesvdm.ventassringboot.domain.Comercial;
 import org.iesvdm.ventassringboot.domain.Pedido;
@@ -10,9 +11,11 @@ import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 
+@Slf4j
 @Repository
 public class PedidoDAOImpl implements PedidoDAO<Pedido> {
     private final JdbcTemplate jdbcTemplate;
+
 
     public PedidoDAOImpl(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
@@ -20,7 +23,8 @@ public class PedidoDAOImpl implements PedidoDAO<Pedido> {
 
     @Override
     public void create(Pedido pedido) {
-
+        jdbcTemplate.update("INSERT INTO pedido ( total , fecha, id_cliente, id_comercial) VALUES (?, ?, ?, ?)",
+                pedido.getTotal(), pedido.getFecha(), pedido.getIdCliente(), pedido.getIdComercial());
     }
 
     @Override
@@ -33,17 +37,28 @@ public class PedidoDAOImpl implements PedidoDAO<Pedido> {
 
     @Override
     public Optional<Pedido> find(int id) {
-        return Optional.empty();
+        Pedido pedido = jdbcTemplate
+                .queryForObject("SELECT * FROM pedido WHERE id = ?"
+                        , (rs, rowNum) -> new Pedido(rs.getInt("id"), rs.getDouble("total"), rs.getDate("fecha").toLocalDate(), rs.getInt("id_cliente"), rs.getInt("id_comercial"))
+                        , id
+                );
+
+
+        if (pedido != null) return Optional.of(pedido);
+        else return Optional.empty();
     }
 
     @Override
     public void update(Pedido pedido) {
-
+        this.jdbcTemplate.update("""
+                      update pedido set total = ?, fecha = ?, id_cliente = ?, id_comercial = ? where id = ?
+                    """, pedido.getTotal(), pedido.getFecha(), pedido.getCliente().getId(), pedido.getComercial().getId(), pedido.getId());
     }
 
     @Override
     public void delete(int id) {
-
+        int rows = jdbcTemplate.update("DELETE FROM pedido WHERE id = ?", id);
+        if (rows == 0) System.out.println("Update de pedido con 0 registros actualizados.");
     }
 
     @Override
@@ -74,84 +89,21 @@ public class PedidoDAOImpl implements PedidoDAO<Pedido> {
 
     @Override
     public Optional<Cliente> findClienteBy(int pedidoId) {
-        return Optional.empty();
-    }
+        Optional<Cliente> cliente = Optional.ofNullable(
+                jdbcTemplate.queryForObject("SELECT c.* FROM pedido p join cliente c on p.id_cliente = c.id where p.id = ?",
+                        (rs, rowNum) -> new Cliente(rs.getInt("id"), rs.getString("nombre"), rs.getString("apellido1"), rs.getString("apellido2"), rs.getString("ciudad"), rs.getInt("categoría"), rs.getString("email"))
+                        , pedidoId));
 
-//    @Override
-//    public Optional<Cliente> findClienteBy(int pedidoId) {
-//
-//        Optional<Cliente> cliente = Optional.ofNullable(
-//                jdbcTemplate.queryForObject("SELECT c.* FROM pedido p join cliente c on p.id_cliente = c.id where p.id = ?",
-//                        (rs, rowNum) -> new Cliente(rs.getInt("id"), rs.getString("nombre"), rs.getString("apellido1"), rs.getString("apellido2"), rs.getString("ciudad"), rs.getInt("categoría"))
-//                        , pedidoId));
-//
-//        return cliente;
-//    }
+        return cliente;
+    }
 
     @Override
     public Optional<Comercial> findComercialBy(int pedidoId) {
-        return null;
+        Optional<Comercial> comercial = Optional.ofNullable(
+                jdbcTemplate.queryForObject("SELECT co.* FROM pedido p join comercial co on p.id_comercial = co.id where p.id = ?",
+                        (rs, rowNum) -> new Comercial(rs.getInt("id"), rs.getString("nombre"), rs.getString("apellido1"), rs.getString("apellido2"), BigDecimal.valueOf(rs.getFloat("comisión")))
+                        , pedidoId));
+
+        return comercial;
     }
-
-//    @Override
-//    public void create(Pedido pedido) {
-//
-//        KeyHolder keyHolder = new GeneratedKeyHolder();
-//        //Con recuperación de id generado
-//        int rows = jdbcTemplate.update(connection -> {
-//            PreparedStatement ps = connection.prepareStatement("""
-//                        insert into pedido ( total, fecha, id_cliente, id_comercial)
-//                        values (?, ?, ?, ?);
-//                        """, new String[] { "id" });
-//            int idx = 1;
-//            ps.setDouble(idx++, pedido.getTotal());
-//            ps.setDate(idx++, new java.sql.Date(pedido.getFecha().getTime()));
-//            ps.setInt(idx++, pedido.getCliente().getId());
-//            ps.setInt(idx++, pedido.getComercial().getId());
-//            return ps;
-//        },keyHolder);
-//
-//        log.info("Filas creadas {}", rows);
-//        log.debug("Pedido con id = {} grabado correctamente",keyHolder.getKey().intValue());
-//
-//        pedido.setId(keyHolder.getKey().intValue());
-//
-//    }
-
-
-//    @Override
-//    public Optional<Pedido> find(int id) {
-//
-//        Pedido pedido= this.jdbcTemplate.queryForObject("""
-//                    select * from pedido P left join cliente C on  P.id_cliente = C.id
-//                                        left join comercial CO on P.id_comercial = CO.id
-//                                        WHERE P.id = ?
-//                """, (rs, rowNum) -> PedidoDAO.newPedido(rs), id);
-//
-//        if (pedido != null) return Optional.of(pedido);
-//        log.debug("No encontrado pedido con id {} devolviendo Optional.empty()", id);
-//        return Optional.empty();
-//    }
-
-//    @Override
-//    public void update(Pedido pedido) {
-//
-//        this.jdbcTemplate.update("""
-//                      update pedido set total = ?, fecha = ?, id_cliente = ?, id_comercial = ? where id = ?
-//                    """, pedido.getTotal(), pedido.getFecha(), pedido.getCliente().getId(), pedido.getComercial().getId(), pedido.getId());
-//
-//    }
-
-//    @Override
-//    public void delete(long id) {
-//
-//        this.jdbcTemplate.update("""
-//                            delete from pedido where id = ?
-//                            """
-//                , id
-//        );
-//
-//    }
-
-
 }

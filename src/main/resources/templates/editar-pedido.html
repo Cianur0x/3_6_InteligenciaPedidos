@@ -1,0 +1,86 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<head>
+    <title>Editar Pedido</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.1/css/all.css"
+          integrity="sha384-O8whS3fhG2OnA5Kas0Y9l3cfpmYjapjI0E4theH4iuMD+pLhbf6JI0jIMfYcK3yZ" crossorigin="anonymous">
+</head>
+<body>
+<div class=" d-flex justify-content-center">
+    <div class="w-25">
+        <form th:action="@{/pedidos/editar/__${pedido.id}__}" th:object="${pedido}" method="post">
+            <div class="form-group">
+                <label for="id">ID</label>
+                <input type="text" class="form-control" id="id" th:field="*{id}" placeholder="ID" readonly>
+                <ul class="text-danger" th:if="${#fields.hasErrors('id')}">
+                    <li th:each="err : ${#fields.errors('id')}" th:text="${err}"/>
+                </ul>
+            </div>
+            <div class="form-group">
+                <label for="nombre" th:text="#{nombre}"></label>
+                <input type="text" class="form-control" id="nombre" th:field="*{total}" placeholder="Nombre">
+                <ul class="text-danger" th:if="${#fields.hasErrors('total')}">
+                    <li th:each="err : ${#fields.errors('total')}" th:text="${err}"/>
+                </ul>
+            </div>
+            <div class="form-group">
+                <label for="ape1" th:text="#{apell1}"></label>
+                <input type="date" class="form-control" id="ape1" th:field="*{fecha}" placeholder="Primer Apellido">
+                <ul class="text-danger" th:if="${#fields.hasErrors('fecha')}">
+                    <li th:each="err : ${#fields.errors('fecha')}" th:text="${err}"/>
+                </ul>
+            </div>
+            <div class="form-group">
+                <label for="ape1" th:text="#{apell1}"></label>
+                <select class="custom-select" aria-label="Default select example"  th:field="*{idCliente}">
+                    <option th:text="${'Id: ' + pedido.cliente.id + ' - ' + pedido.cliente.nombre + ' ' + pedido.cliente.apellido1 + ' ' + pedido.cliente.apellido2}"
+                            th:value="${pedido.cliente.id}"
+                           ></option>
+                    <option th:each="cliente:${listaClientes}"
+                            th:value="${cliente.id}"
+                            th:text="${'Id: ' + cliente.id + ' - ' + cliente.nombre + ' ' + cliente.apellido1 + ' ' + cliente.apellido2}"
+                    ></option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="ape1" th:text="#{apell1}"></label>
+                <select class="custom-select" aria-label="Default select example"  th:field="*{idComercial}" >
+                    <option th:text="${'Id: ' + pedido.comercial.id + ' - ' + pedido.comercial.nombre + ' ' + pedido.comercial.apellido1 + ' ' + pedido.comercial.apellido2}"
+                            th:value="${pedido.comercial.id}"
+                         ></option>
+                    <option th:each="comercial:${listaComerciales}"
+                            th:value="${comercial.id}"
+                            th:text="${'Id: ' + comercial.id + ' - ' + comercial.nombre + ' ' + comercial.apellido1 + ' ' + comercial.apellido2}"
+                    ></option>
+                </select>
+            </div>
+
+            <button th:href="@{/pedidos}" class="btn btn-info"><i class="fas fa-arrow-left  "></i>
+                <th:block th:text="#{btnVolver}"></th:block>
+            </button>
+            <button type="submit" class="btn btn-primary"><i class="fas fa-paper-plane  "></i>
+                <th:block th:text="#{btnEnviar}"></th:block>
+            </button>
+        </form>
+    </div>
+</div>
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+</body>
+</html>
